@@ -10,18 +10,24 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour {
 
     public GameManager Instance;
-    public Self self;
+    //public Self self;
     public int planetRotation;
 
     public List<GameObject> planetObjects;
     public int[] PlanetSettings;
 
-  
+    public Planet1 planet1;
+    public Planet2 planet2;
+    public Planet3 planet3;
+
+
+    public List<Material> PlanetMaterials;
+
 
     public string currentPlanet;
  
 
-    public GameObject Planet;
+   // public GameObject[] planetObjects;
 
  
 	void Start ()
@@ -29,13 +35,14 @@ public class GameManager : MonoBehaviour {
         
         Instance = this;
 
+       // planetObjects = self.planets;
         //1. Player selects a planet on the world
         //2. Get the planet's index. (number)
         //3. Access the list of planets planetObjects[x] , and then access the planet o the specific index  planetObjects[selectedIndex]
         //4. Edit functionality. 
 
-        
-       
+
+
     }
 
 
@@ -51,18 +58,35 @@ public class GameManager : MonoBehaviour {
 
         if (inputDevice.GetButtonDown(VRButton.One))
         {
+            if (!planetObjects.Contains(planet1.SelfObject))
+            {
+                planetObjects.Add(planet1.SelfObject);
+                PlanetMaterials.Add(planet1.Planet1Material);
+            }
+            else if (!planetObjects.Contains(planet2.SelfObject))
+            {
+                planetObjects.Add(planet2.SelfObject);
+                PlanetMaterials.Add(planet2.Planet2Material);
+            }
 
-            //Planet = self.SelfObject;
-            
-            planetObjects.Add(self.SelfObject);
-          
+            else if (!planetObjects.Contains(planet3.SelfObject))
+            {
+                planetObjects.Add(planet3.SelfObject);
+                PlanetMaterials.Add(planet3.Planet3Material);
+            }
+            // this handles input
+
+               
+
         }
 
     }
 
+
+
     // Update is called once per frame
     void Update () {
-
-     
+      
+       
     }
 }
