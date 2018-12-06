@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Observatory/Scenes/Alex.unity
+- path: Assets/Observatory/Scenes/Eric.unity
   isLoaded: 1
   isActive: 1
