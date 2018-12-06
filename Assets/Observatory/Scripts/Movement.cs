@@ -10,9 +10,6 @@ public class Movement : MonoBehaviour
 
     public float speed;
 
-
-
-
     // Use this for initialization
     void Start()
     {
@@ -22,12 +19,9 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         float step = speed * Time.deltaTime;
 
         transform.position = Vector3.MoveTowards(transform.position, target1.position, step);
-
-
     }
 
 

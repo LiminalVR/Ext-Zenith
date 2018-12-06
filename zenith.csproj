@@ -255,9 +255,9 @@
     <Compile Include="Assets\Liminal\Examples\Scripts\InputHandler.cs" />
     <Compile Include="Assets\Liminal\Excluded\Tests\Test.cs" />
     <Compile Include="Assets\Liminal\Excluded\Tests\TestCube.cs" />
+    <Compile Include="Assets\Observatory\Scripts\AudioControl\PlaySizeSFX.cs" />
     <Compile Include="Assets\Observatory\Scripts\GameManager.cs" />
     <Compile Include="Assets\Observatory\Scripts\Movement.cs" />
-    <Compile Include="Assets\Observatory\Scripts\OnPlanetClick.cs" />
     <Compile Include="Assets\Observatory\Scripts\PlanetRotation.cs" />
     <Compile Include="Assets\Observatory\Scripts\PlanetScripts\Planet1.cs" />
     <Compile Include="Assets\Observatory\Scripts\PlanetScripts\Planet2.cs" />

@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 9
+  controlID: 116
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 110
+  controlID: 117
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 111
+  controlID: 118
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -201,8 +201,8 @@ MonoBehaviour:
     y: 0
     width: 968
     height: 573
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -368,7 +368,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 1a09f4fffa09f4ff5e0cf4ffc833faffd033faffb237faffda37faffec37faffa6a0faff28b8faffa8dcfafff4defaff261ffbff1e6bfbff48c5fbff30dffbff1e4afcffa6f8ffff000000007c3100008a310000a6310000b0310000b6310000c4310000e03100001e320000b44100004c4200009a420000744300007e430000a44300008c4b0000924b0000244c0000724c00004c550000925500009c550000aa550000d055000012560000c692000064930000
+    m_ExpandedIDs: 4cbdf1ff2abef1ff90c0f1ff24cdf1ff02cef1ff68d0f1ffc647fdff744cfdff3af4ffff000000008e340000d4340000043500002c3500003e35000094350000f4350000fa3500003a3600004236000098360000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -418,14 +418,14 @@ MonoBehaviour:
     width: 964
     height: 552
   m_SceneLighting: 1
-  lastFramingTime: 8720.339494098955
+  lastFramingTime: 7168.013114389701
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.0000009536743, y: -3.5, z: -0.0000014305115}
+    m_Target: {x: -28.178669, y: 10.940868, z: 2.5569248}
     speed: 2
-    m_Value: {x: 0.0000009536743, y: -3.5, z: -0.0000014305115}
+    m_Value: {x: -28.178669, y: 10.940868, z: 2.5569248}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -448,13 +448,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.15157935, y: -0.46512198, z: 0.08118727, w: 0.86838704}
+    m_Target: {x: 0.075563036, y: 0.6156565, z: -0.05948092, w: 0.78212494}
     speed: 2
-    m_Value: {x: 0.15157919, y: -0.46512148, z: 0.08118718, w: 0.8683861}
+    m_Value: {x: 0.075563036, y: 0.6156565, z: -0.05948092, w: 0.78212494}
   m_Size:
-    m_Target: 36.209255
+    m_Target: 34.937687
     speed: 2
-    m_Value: 36.209255
+    m_Value: 34.937687
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -488,9 +488,9 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 381
+    x: 402
     y: 92
-    width: 1148
+    width: 964
     height: 552
 --- !u!114 &16
 MonoBehaviour:
@@ -530,33 +530,33 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Observatory/ArtAssets/PlanetMaterials
+    - Assets/Observatory/Audio/SoundFX/Input (Button Press Beep)/RecommendedInput
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Observatory/ArtAssets/PlanetMaterials
+  - Assets/Observatory/Audio/SoundFX/Input (Button Press Beep)/RecommendedInput
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\429375\Desktop\zenith
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 100}
-    m_SelectedIDs: 12360000
-    m_LastClickedID: 13842
-    m_ExpandedIDs: 000000001c2e0000222e0000be2e0000422f0000b0300000f03500001236000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 212}
+    m_SelectedIDs: 7c930000
+    m_LastClickedID: 37756
+    m_ExpandedIDs: 00000000fc30000002310000a83100003232000078320000a8320000ca32000020340000ae930000b2930000c8930000ca93000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Prefabs
-      m_OriginalName: Prefabs
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 12116
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -570,7 +570,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000001c2e0000222e0000422f0000b0300000
+    m_ExpandedIDs: 00000000fc30000002310000a83100003232000078320000a033000020340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
