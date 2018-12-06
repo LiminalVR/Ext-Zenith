@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class ValueChanges : MonoBehaviour
 {
+    public ValueChanges valueChanges;
+    public GameManager gameManager;
+   
+
 
     public GameObject planet;
     public Material[] materials;
@@ -21,143 +25,167 @@ public class ValueChanges : MonoBehaviour
 
 
 
+    //Size Change Values
+    public Vector3 size1;
+    public Vector3 size2;
+    public Vector3 size3;
+    public Vector3 size4;
+    public Vector3 size5;
+
+    //Speed Change Values
+    public float PlanetSpeed;
+    public float speed1;
+    public float speed2;
+    public float speed3;
+    public float speed4;
+    public float speed5;
+
+    public float NewSpeed;
+
+
+    public bool changedValue;
 
 
 
     // Use this for initialization
     void Start()
     {
-
+        valueChanges = this;
+        changedValue = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        print(changedValue);
     }
+    
 
-    public void ColorChange()
+
+
+    //UI Handles and buttons
+    // Color Change Buttons
+    public void ColorChangeRed()
     {
-
-        if (gameObject.tag == "colorRed")
-        {
-            //image.GetComponent<Image>().color = Color.red;
+       
+            print("ChangeMe");
+        //image.GetComponent<Image>().color = Color.red;
+        
             planet.GetComponent<MeshRenderer>().material = materials[0];
 
-        }
+        
+    
+        
+    }
+    public void ColorChangeGreen()
+    {
 
-        if (gameObject.tag == "colorGreen")
-        {
             //image.GetComponent<Image>().color = Color.green;
             planet.GetComponent<MeshRenderer>().material = materials[1];
-
-        }
-
-        if (gameObject.tag == "colorBlue")
-        {
+       
+    }
+    public void ColorChangeBlue()
+    {
+        
             //image.GetComponent<Image>().color = Color.blue;
             planet.GetComponent<MeshRenderer>().material = materials[2];
 
-        }
-
-
-
+        
     }
 
-    public void SizeChange()
+
+    // Size Change Buttons
+    public void SizeChange1()
     {
 
-        if (gameObject.tag == "sizeOne")
-        {
             //image.rectTransform.sizeDelta = new Vector2(25, 25);
-            planet.GetComponent<Transform>().localScale = new Vector3(0.4F, 0.4F, 0.4F);
-            sizeButton1.GetComponent<Image>().color = Color.black;
-            sizeButton1.GetComponent<Text>().color = Color.white;
+            planet.GetComponent<Transform>().localScale = size1;
+           
 
+        
 
-
-        }
-
-        if (gameObject.tag == "sizeTwo")
-        {
-            //image.rectTransform.sizeDelta = new Vector2(50, 50);
-            planet.GetComponent<Transform>().localScale = new Vector3(0.6F, 0.6F, 0.6F);
-            sizeButton2.GetComponent<Image>().color = Color.black;
-            sizeButton2.GetComponent<Text>().color = Color.white;
-
-
-        }
-
-        if (gameObject.tag == "sizeThree")
-        {
-            //image.rectTransform.sizeDelta = new Vector2(75, 75);
-            planet.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-            sizeButton3.GetComponent<Image>().color = Color.black;
-            sizeButton3.GetComponent<Text>().color = Color.white;
-
-
-        }
-
-        if (gameObject.tag == "sizeFour")
-        {
-            //image.rectTransform.sizeDelta = new Vector2(100, 100);
-            planet.GetComponent<Transform>().localScale = new Vector3(1.5F, 1.5F, 1.5F);
-            sizeButton4.GetComponent<Image>().color = Color.black;
-            sizeButton4.GetComponent<Text>().color = Color.white;
-
-
-        }
-
-        if (gameObject.tag == "sizeFive")
-        {
-            //image.rectTransform.sizeDelta = new Vector2(200, 200);
-            planet.GetComponent<Transform>().localScale = new Vector3(6, 6, 6);
-            sizeButton5.GetComponent<Image>().color = Color.black;
-            sizeButton5.GetComponent<Text>().color = Color.white;
-
-
-        }
     }
-
-    public void SpeedChange()
+    public void SizeChange2()
     {
+       
+            //image.rectTransform.sizeDelta = new Vector2(50, 50);
+            planet.GetComponent<Transform>().localScale = size2;
+          
 
-        if (gameObject.tag == "sizeOne")
-        {
-            image.GetComponent<Movement>().speed = 0.1f;
-            print("button1");
-        }
 
-        if (gameObject.tag == "sizeTwo")
-        {
-            image.GetComponent<Movement>().speed = 0.2f;
-            print("BUTTON2");
-
-        }
-
-        if (gameObject.tag == "sizeThree")
-        {
-            image.GetComponent<Movement>().speed = 0.5f;
-            print("BUTTON3");
-
-        }
-
-        if (gameObject.tag == "sizeFour")
-        {
-            image.GetComponent<Movement>().speed = 1;
-            print("BUTTON4");
-
-        }
-
-        if (gameObject.tag == "sizeFive")
-        {
-            image.GetComponent<Movement>().speed = 1.5f;
-            print("BUTTON5");
-
-        }
+        
+    }
+    public void SizeChange3()
+    {
+        
+            //image.rectTransform.sizeDelta = new Vector2(75, 75);
+            planet.GetComponent<Transform>().localScale = size3;
+         
+    
 
 
     }
+    public void SizeChange4()
+    {
+        
+            //image.rectTransform.sizeDelta = new Vector2(100, 100);
+            planet.GetComponent<Transform>().localScale = size4;
+         
 
+
+        
+
+    }
+    public void SizeChange5()
+    {
+          //image.rectTransform.sizeDelta = new Vector2(200, 200);
+            planet.GetComponent<Transform>().localScale = size5;
+       
+ 
+    }
+
+
+    //SpeedChange Buttons
+    public void SpeedChange1()
+    {
+        
+        changedValue = true;
+        gameManager.ChangeSpeed = true;
+        NewSpeed = speed1;
+        //PlanetSpeed = PlanetSpeed* speed1;
+        
+        
+    }
+    public void SpeedChange2()
+    {
+        changedValue = true;
+        gameManager.ChangeSpeed = true;
+        NewSpeed = speed2;
+       // PlanetSpeed = PlanetSpeed * speed2;
+    }
+    public void SpeedChange3()
+    {
+        changedValue = true;
+        gameManager.ChangeSpeed = true;
+        NewSpeed = speed3;
+      
+       // PlanetSpeed = PlanetSpeed * speed3;
+    }
+    public void SpeedChange4()
+    {
+        changedValue = true;
+        gameManager.ChangeSpeed = true;
+        NewSpeed = speed4;
+       // PlanetSpeed = PlanetSpeed * speed4;
+    }
+    public void SpeedChange5()
+    {
+        changedValue = true;
+        gameManager.ChangeSpeed = true;
+        NewSpeed = speed5;
+        //PlanetSpeed = PlanetSpeed * speed5;
+    }
+
+  
 
 }

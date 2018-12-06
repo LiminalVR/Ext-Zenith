@@ -10,6 +10,9 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour {
 
     public GameManager Instance;
+    public ValueChanges ValueChangesScript;
+    public Self selfScript;
+
     //public Self self;
     public int planetRotation;
 
@@ -25,6 +28,15 @@ public class GameManager : MonoBehaviour {
 
 
     public string currentPlanet;
+
+
+    public GameObject Planet;
+
+    public bool ChangeSpeed;
+
+
+
+   
  
 
    // public GameObject[] planetObjects;
@@ -34,6 +46,7 @@ public class GameManager : MonoBehaviour {
     {
         
         Instance = this;
+        ChangeSpeed = false;
 
        // planetObjects = self.planets;
         //1. Player selects a planet on the world
@@ -58,26 +71,66 @@ public class GameManager : MonoBehaviour {
 
         if (inputDevice.GetButtonDown(VRButton.One))
         {
-            if (!planetObjects.Contains(planet1.SelfObject))
+            
+            planetObjects.Clear();
+            if (planet1.IWasClicked1)
             {
+                
                 planetObjects.Add(planet1.SelfObject);
-                PlanetMaterials.Add(planet1.Planet1Material);
+                ValueChangesScript.planet = planetObjects[0];
+                ValueChangesScript.PlanetSpeed = planet1.currentSpeed * ValueChangesScript.speed1;
+                ChangeSpeed = true;
+
+                if (ValueChangesScript.changedValue == true)
+                {
+                    
+                    planet1.currentSpeed = planet1.currentSpeed * ValueChangesScript.NewSpeed;
+                    ValueChangesScript.changedValue = false;
+                }
+                
+
             }
-            else if (!planetObjects.Contains(planet2.SelfObject))
+
+
+
+            else if (planet2.IWasClicked2 == true)
             {
                 planetObjects.Add(planet2.SelfObject);
-                PlanetMaterials.Add(planet2.Planet2Material);
+                ValueChangesScript.planet = planetObjects[0];
+                ValueChangesScript.PlanetSpeed = planet2.currentSpeed;
+                ChangeSpeed = true;
+
+
+                if (ValueChangesScript.changedValue == true)
+                {
+                    
+                    planet2.currentSpeed = planet2.currentSpeed * ValueChangesScript.NewSpeed;
+                    ValueChangesScript.changedValue = false;
+                }
             }
 
-            else if (!planetObjects.Contains(planet3.SelfObject))
+
+
+            else if (planet3.IwasClicked3)
             {
+                
                 planetObjects.Add(planet3.SelfObject);
-                PlanetMaterials.Add(planet3.Planet3Material);
+                ValueChangesScript.planet = planetObjects[0];
+                ValueChangesScript.PlanetSpeed = planet3.currentSpeed;
+                ChangeSpeed = true;
+
+
+                if (ValueChangesScript.changedValue == true)
+                {
+                    print("Hello");
+                    
+                    planet3.currentSpeed = planet3.currentSpeed * ValueChangesScript.NewSpeed;
+                    
+                    ValueChangesScript.changedValue = false;
+                }
             }
-            // this handles input
-
-               
-
+         
+            
         }
 
     }
@@ -86,7 +139,8 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-      
+        Input();
+        print("New Speed" + ChangeSpeed);
        
     }
 }

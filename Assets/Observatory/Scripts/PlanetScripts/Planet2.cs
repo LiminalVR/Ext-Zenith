@@ -4,20 +4,52 @@ using UnityEngine;
 
 public class Planet2 : MonoBehaviour {
 
+
+    public Planet1 planet1;
     public Planet2 planet2;
+    public Planet3 planet3;
+    public PlanetRotation planetrotationScript;
+
+    public GameManager gameManager;
+
+    public float currentSpeed;
 
     public GameObject SelfObject;
-    public Material Planet2Material;
+    public MeshRenderer Planet2Material;
+
+    public bool IWasClicked2;
+   
+    public MeshRenderer selfMesh;
+
     // Use this for initialization
     void Start()
     {
         planet2 = this;
         SelfObject = this.gameObject;
+        IWasClicked2 = false;
+        currentSpeed = planetrotationScript.rotationSpeed;
+        selfMesh.material = Planet2Material.material;
+
+    }
+
+    public void clicked()
+    {
+       
+        IWasClicked2 = true;
+        planet1.IWasClicked1 = false;
+        planet3.IwasClicked3 = false;
+        print("2" +IWasClicked2);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.ChangeSpeed == true)
+        {
+            planetrotationScript.rotationSpeed = currentSpeed;
+            
+        }
+        Planet2Material.material = selfMesh.material;
 
     }
 }

@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - sizeTwo
+  - sizeThree
+  - sizeFour
+  - sizeFive
+  - sizeOne
+  - colorRed
+  - colorGreen
+  - colorBlue
+  - Planet
   layers:
   - Default
   - TransparentFX
