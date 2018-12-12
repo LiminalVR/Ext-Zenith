@@ -8,6 +8,7 @@ public class Planet3 : MonoBehaviour {
 
     public GameObject SelfObject;
     public Material Planet3Material;
+
     // Use this for initialization
     void Start()
     {
