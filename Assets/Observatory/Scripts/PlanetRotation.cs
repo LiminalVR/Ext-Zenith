@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlanetRotation : MonoBehaviour
 {
-
     public float rotationSpeed;
     public float dampening;
     public GameManager gameManager;
@@ -13,11 +12,9 @@ public class PlanetRotation : MonoBehaviour
 
     private GameObject self;
 
-
     private void Start()
-    {
-        
-       // rotationSpeed = gameManager.planetRotation[planetIndex]
+    {        
+       //rotationSpeed = gameManager.planetRotation[planetIndex]
     }
 
     // Update is called once per frame
