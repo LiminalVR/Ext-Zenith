@@ -21,6 +21,8 @@ public class Planet2 : MonoBehaviour {
    
     public MeshRenderer selfMesh;
 
+    public AudioSource OnClickedAudio;
+
     // Use this for initialization
     void Start()
     {
@@ -35,7 +37,7 @@ public class Planet2 : MonoBehaviour {
 
     public void clicked()
     {
-       
+        OnClickedAudio.Play(0);
         IWasClicked2 = true;
         planet1.IWasClicked1 = false;
         planet3.IwasClicked3 = false;

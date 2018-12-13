@@ -20,6 +20,8 @@ public class Planet3 : MonoBehaviour {
     public GameManager gameManager;
 
     public bool IwasClicked3;
+
+    public AudioSource OnClickedAudio;
     // Use this for initialization
     void Start()
     {
@@ -33,7 +35,7 @@ public class Planet3 : MonoBehaviour {
 
     public void clicked()
     {
-
+        OnClickedAudio.Play(0);
         IwasClicked3 = true;
         planet1.IWasClicked1 = false;
         planet2.IWasClicked2 = false;

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour {
     public Planet1 planet1;
     public Planet2 planet2;
     public Planet3 planet3;
+    public Planet4 planet4;
 
 
     public List<Material> PlanetMaterials;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour {
     public bool OnPlanet1 =false;
     public bool OnPlanet2 = false;
     public bool OnPlanet3 = false;
+    public bool OnPlanet4 = false;
 
 
 
@@ -77,14 +79,13 @@ public class GameManager : MonoBehaviour {
         var inputDevice = vrDevice.PrimaryInputDevice;
         if (inputDevice == null)
         {
-            print("Poop");
             return;
         }
             
 
         if (inputDevice.GetButtonDown(VRButton.One))
         {
-            print("Hello?");
+          
 
             
             planetObjects.Clear();
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour {
                 OnPlanet1 = true;
                 OnPlanet3 = false;
                 OnPlanet2 = false;
+                OnPlanet4 = false;
 
 
             }
@@ -118,6 +120,7 @@ public class GameManager : MonoBehaviour {
                 OnPlanet2 = true;
                 OnPlanet3 = false;
                 OnPlanet1 = false;
+                OnPlanet4 = false;
 
 
             }
@@ -137,9 +140,26 @@ public class GameManager : MonoBehaviour {
                 OnPlanet3 = true;
                 OnPlanet1 = false;
                 OnPlanet2 = false;
+                OnPlanet4 = false;
             }
-         
-            
+            else if (planet4.IwasClicked4)
+            {
+
+                //planetPivots.Add(planet1.SelfObject);
+                planetObjects.Add(planet4.SelfObject);
+                ValueChangesScript.planet = planetObjects[0];
+                ValueChangesScript.planetPivot = planetPivots[3];
+                print(ValueChangesScript.planet.name);
+                ValueChangesScript.PlanetSpeed = planet4.currentSpeed;
+                OnPlanet4 = true;
+                OnPlanet3 = false;
+                OnPlanet2 = false;
+                OnPlanet1 = false;
+
+
+            }
+
+
         }
 
     }

@@ -243,10 +243,10 @@
       <HintPath>Assets/Liminal/SDK/Plugins/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Users/429375/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
+      <HintPath>C:/Users/417395/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/Users/429375/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>C:/Users/417395/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -258,10 +258,12 @@
     <Compile Include="Assets\Observatory\Scripts\AudioControl\PlaySizeSFX.cs" />
     <Compile Include="Assets\Observatory\Scripts\GameManager.cs" />
     <Compile Include="Assets\Observatory\Scripts\Movement.cs" />
+    <Compile Include="Assets\Observatory\Scripts\OnPlanetClick.cs" />
     <Compile Include="Assets\Observatory\Scripts\PlanetRotation.cs" />
     <Compile Include="Assets\Observatory\Scripts\PlanetScripts\Planet1.cs" />
     <Compile Include="Assets\Observatory\Scripts\PlanetScripts\Planet2.cs" />
     <Compile Include="Assets\Observatory\Scripts\PlanetScripts\Planet3.cs" />
+    <Compile Include="Assets\Observatory\Scripts\PlanetScripts\Planet4.cs" />
     <Compile Include="Assets\Observatory\Scripts\Self.cs" />
     <Compile Include="Assets\Observatory\Scripts\ValueChanges.cs" />
   </ItemGroup>

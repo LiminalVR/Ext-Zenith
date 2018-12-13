@@ -174,19 +174,27 @@ public class ValueChanges : MonoBehaviour
     {
         if (gameManager.OnPlanet1 == true)
         {
+            gameManager.ChangeSpeed = true;
             gameManager.planetSpeed[0] = speed1;
         }
         else if (gameManager.OnPlanet2 == true)
         {
+            gameManager.ChangeSpeed = true;
             gameManager.planetSpeed[1] = speed1;
         }
         else if (gameManager.OnPlanet3 == true)
         {
+            gameManager.ChangeSpeed = true;
             gameManager.planetSpeed[2] = speed1;
         }
-       
-        
-        
+        else if (gameManager.OnPlanet4 == true)
+        {
+            gameManager.ChangeSpeed = true;
+            gameManager.planetSpeed[3] = speed1;
+        }
+
+
+
     }
     public void SpeedChange2()
     {
@@ -204,6 +212,11 @@ public class ValueChanges : MonoBehaviour
         {
             gameManager.ChangeSpeed = true;
             gameManager.planetSpeed[2] = speed2;
+        }
+        else if (gameManager.OnPlanet4 == true)
+        {
+            gameManager.ChangeSpeed = true;
+            gameManager.planetSpeed[3] = speed2;
         }
 
     }
@@ -224,6 +237,11 @@ public class ValueChanges : MonoBehaviour
             gameManager.ChangeSpeed = true;
             gameManager.planetSpeed[2] = speed3;
         }
+        else if (gameManager.OnPlanet4 == true)
+        {
+            gameManager.ChangeSpeed = true;
+            gameManager.planetSpeed[3] = speed3;
+        }
     }
     public void SpeedChange4()
     {
@@ -242,6 +260,11 @@ public class ValueChanges : MonoBehaviour
             gameManager.ChangeSpeed = true;
             gameManager.planetSpeed[2] = speed4;
         }
+        else if (gameManager.OnPlanet4 == true)
+        {
+            gameManager.ChangeSpeed = true;
+            gameManager.planetSpeed[3] = speed4;
+        }
     }
     public void SpeedChange5()
     {
@@ -259,6 +282,11 @@ public class ValueChanges : MonoBehaviour
         {
             gameManager.ChangeSpeed = true;
             gameManager.planetSpeed[2] = speed5;
+        }
+        else if (gameManager.OnPlanet4 == true)
+        {
+            gameManager.ChangeSpeed = true;
+            gameManager.planetSpeed[3] = speed5;
         }
     }
     
