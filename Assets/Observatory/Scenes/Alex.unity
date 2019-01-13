@@ -2802,8 +2802,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 674414155}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.48, y: 0, z: -1.98}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1212698397}
@@ -2812,7 +2812,7 @@ Transform:
   - {fileID: 584386914}
   - {fileID: 556503890}
   m_Father: {fileID: 1379532632}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &674414157
 MonoBehaviour:
@@ -4781,7 +4781,7 @@ Transform:
   - {fileID: 1577680161}
   - {fileID: 802521007}
   m_Father: {fileID: 1379532632}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1379532628
 GameObject:
@@ -4796,7 +4796,7 @@ GameObject:
   - component: {fileID: 1379532630}
   - component: {fileID: 1379532629}
   m_Layer: 0
-  m_Name: Observatory 1
+  m_Name: '[ExperienceApp]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4814,7 +4814,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ec962e9fafba547a968c864bacffa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instance: {fileID: 1379532629}
   ValueChangesScript: {fileID: 283816745}
   selfScript: {fileID: 0}
   planetRotation: 0
@@ -4890,8 +4889,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1330181516}
   - {fileID: 674414156}
+  - {fileID: 1330181516}
   - {fileID: 376622437}
   - {fileID: 1851616494}
   - {fileID: 650460591}

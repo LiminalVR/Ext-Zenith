@@ -41,6 +41,9 @@ public class Planet2 : MonoBehaviour {
         IWasClicked2 = true;
         planet1.IWasClicked1 = false;
         planet3.IwasClicked3 = false;
+
+        GameManager.Instance.SelectPlanet(gameObject);
+
         print("2" +IWasClicked2);
     }
 

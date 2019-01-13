@@ -41,8 +41,8 @@ public class Planet4 : MonoBehaviour {
         planet1.IWasClicked1 = false;
         planet2.IWasClicked2 = false;
         planet3.IwasClicked3 = false;
-       
 
+        GameManager.Instance.SelectPlanet(gameObject);
     }
 
     // Update is called once per frame

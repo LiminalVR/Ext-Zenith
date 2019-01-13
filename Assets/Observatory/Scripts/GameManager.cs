@@ -9,7 +9,7 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
 
-    public GameManager Instance;
+    public static GameManager Instance;
     public ValueChanges ValueChangesScript;
     public Self selfScript;
 
@@ -67,6 +67,14 @@ public class GameManager : MonoBehaviour {
 
 
 
+    }
+
+    public void SelectPlanet(GameObject selectedPlanet)
+    {
+        ValueChangesScript.planet = selectedPlanet;
+        ValueChangesScript.planetPivot = selectedPlanet;
+        print(ValueChangesScript.planet.name);
+        //ValueChangesScript.PlanetSpeed = //planet1.currentSpeed;
     }
 
 
