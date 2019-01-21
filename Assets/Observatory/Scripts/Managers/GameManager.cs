@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour {
     [Space]
     public float TimeRemaining;
 
+
+    public delegate void PlanetSelected();
+    public PlanetSelected PlanetWasSelected;
+
     void Start ()
     {
         Instance = this;
@@ -60,6 +64,11 @@ public class GameManager : MonoBehaviour {
     {
         ValueChangesScript.planet = selectedPlanet;
         ValueChangesScript.planetPivot = selectedPlanet;
+
+        if (PlanetWasSelected != null)
+        {
+            PlanetWasSelected.Invoke();
+        }
     }
 
     private IEnumerator CountdownTimer()
