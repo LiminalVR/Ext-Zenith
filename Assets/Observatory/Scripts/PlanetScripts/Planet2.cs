@@ -29,9 +29,9 @@ public class Planet2 : MonoBehaviour {
         planet2 = this;
         SelfObject = this.gameObject;
         IWasClicked2 = false;
-        currentSpeed = planetrotationScript.rotationSpeed;
+        currentSpeed = planetrotationScript.baseRotationSpeed;
         selfMesh.material = Planet2Material.material;
-        gameManager.planetSpeed[1] = planetrotationScript.rotationSpeed;
+        gameManager.planetSpeed[1] = planetrotationScript.baseRotationSpeed;
 
     }
 
@@ -53,7 +53,7 @@ public class Planet2 : MonoBehaviour {
         if (gameManager.ChangeSpeed == true)
         {
             currentSpeed = gameManager.planetSpeed[1];
-            planetrotationScript.rotationSpeed = currentSpeed;
+            planetrotationScript.baseRotationSpeed = currentSpeed;
 
         }
         Planet2Material.material = selfMesh.material;

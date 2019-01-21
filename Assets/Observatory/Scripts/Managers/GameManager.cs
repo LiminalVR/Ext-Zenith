@@ -2,6 +2,7 @@
 using Liminal.SDK.VR.Input;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Liminal.Core.Fader;
 using Liminal.SDK.Core;
 using UnityEngine;
@@ -45,8 +46,15 @@ public class GameManager : MonoBehaviour {
     public bool OnPlanet2 = false;
     public bool OnPlanet3 = false;
     public bool OnPlanet4 = false;
+
     [Space]
-    public float TimeRemaining;
+    public List<PlanetController> AllPlanetControllers;
+
+    [Space]
+    public float ExperienceLength;
+    [Range(0,1)]
+    public float NormalizedTime;
+    private float TimeRemaining;
 
 
     public delegate void PlanetSelected();
@@ -56,6 +64,8 @@ public class GameManager : MonoBehaviour {
     {
         Instance = this;
         ChangeSpeed = false;
+
+        AllPlanetControllers = FindObjectsOfType<PlanetController>().ToList();
 
         StartCoroutine(CountdownTimer());
     }
@@ -73,9 +83,12 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator CountdownTimer()
     {
-        while (TimeRemaining > 0)
+        TimeRemaining = 0;
+
+        while (TimeRemaining < ExperienceLength)
         {
-            TimeRemaining -= Time.deltaTime;
+            TimeRemaining += Time.deltaTime;
+            NormalizedTime = TimeRemaining / ExperienceLength;
             yield return new WaitForEndOfFrame();
         }
 

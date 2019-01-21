@@ -148,7 +148,7 @@ Transform:
   - {fileID: 1565017440}
   - {fileID: 717572907}
   m_Father: {fileID: 1379532632}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &10396995
 MonoBehaviour:
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   self: {fileID: 10396995}
   SelfObject: {fileID: 10396993}
-  GameManager: {fileID: 1379532629}
+  GameManager: {fileID: 0}
 --- !u!1 &63967003
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,9 +929,8 @@ GameObject:
   - component: {fileID: 270519182}
   - component: {fileID: 270519178}
   - component: {fileID: 270519181}
-  - component: {fileID: 270519180}
-  - component: {fileID: 270519177}
   - component: {fileID: 270519179}
+  - component: {fileID: 270519184}
   m_Layer: 0
   m_Name: Planet2Object
   m_TagString: Untagged
@@ -939,29 +938,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &270519177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114919282944741764, guid: 615937432803fb142abd4ac91f151e65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 270519176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43db388e4988b804aa10a0d7c1fb208d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planet1: {fileID: 862296882}
-  planet2: {fileID: 270519177}
-  planet3: {fileID: 984544777}
-  planetrotationScript: {fileID: 2070381469}
-  gameManager: {fileID: 1379532629}
-  currentSpeed: 0
-  SelfObject: {fileID: 270519176}
-  Planet2Material: {fileID: 270519178}
-  IWasClicked2: 0
-  selfMesh: {fileID: 270519178}
-  OnClickedAudio: {fileID: 109068106}
 --- !u!23 &270519178
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1010,59 +986,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &270519180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114468811467685486, guid: 615937432803fb142abd4ac91f151e65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 270519176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 270519177}
-        m_MethodName: clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &270519181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1113,6 +1036,29 @@ Transform:
   m_Father: {fileID: 2070381470}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &270519184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 270519176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74a0860a970f594d9a0e0503d5853d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggeredEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  thisImage: {fileID: 0}
+  enabledCol: {r: 1, g: 1, b: 1, a: 1}
+  disabledCol: {r: 0.39, g: 0.39, b: 0.39, a: 1}
+  RotScript: {fileID: 2070381469}
+  CurSpeed: 0
+  OnClickedAudio: {fileID: 109068106}
+  BaseScale: {x: 0, y: 0, z: 0}
 --- !u!1 &283816744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,7 +1089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueChanges: {fileID: 283816745}
-  gameManager: {fileID: 1379532629}
+  gameManager: {fileID: 0}
   planet: {fileID: 0}
   planetPivot: {fileID: 0}
   materials:
@@ -1853,7 +1799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1379532632}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &376622438
 MonoBehaviour:
@@ -2066,8 +2012,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: -1
   dampening: 1
-  gameManager: {fileID: 0}
-  planetIndex: 0
+  m_SpeedMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -2.4613662
+      outSlope: -2.4613662
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0.01759422
+      outSlope: 0.01759422
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &449571046 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 072e0e1c208fe8b498c6b1bf6abfe56e, type: 3}
@@ -2372,9 +2334,8 @@ GameObject:
   - component: {fileID: 563738667}
   - component: {fileID: 563738662}
   - component: {fileID: 563738666}
-  - component: {fileID: 563738665}
   - component: {fileID: 563738664}
-  - component: {fileID: 563738661}
+  - component: {fileID: 563738668}
   m_Layer: 0
   m_Name: Planet4Object
   m_TagString: Untagged
@@ -2382,29 +2343,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &563738661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 563738660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195b2628dd2edb74d830865152a68e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planet1: {fileID: 862296882}
-  planet2: {fileID: 270519177}
-  planet3: {fileID: 984544777}
-  planet4: {fileID: 563738661}
-  planetrotationScript: {fileID: 717572905}
-  SelfObject: {fileID: 563738660}
-  Planet4Material: {fileID: 563738662}
-  currentSpeed: 0
-  selfMesh: {fileID: 563738662}
-  gameManager: {fileID: 1379532629}
-  IwasClicked4: 0
-  OnClickedAudio: {fileID: 1828328876}
 --- !u!23 &563738662
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2468,59 +2406,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &563738665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114621331367581236, guid: 615937432803fb142abd4ac91f151e65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 563738660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 563738661}
-        m_MethodName: clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &563738666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2556,6 +2441,29 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563738660}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &563738668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563738660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74a0860a970f594d9a0e0503d5853d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggeredEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  thisImage: {fileID: 0}
+  enabledCol: {r: 1, g: 1, b: 1, a: 1}
+  disabledCol: {r: 0.39, g: 0.39, b: 0.39, a: 1}
+  RotScript: {fileID: 717572905}
+  CurSpeed: 0
+  OnClickedAudio: {fileID: 1828328876}
+  BaseScale: {x: 0, y: 0, z: 0}
 --- !u!1 &584386913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,7 +2555,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1379532632}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &650460592
 AudioSource:
@@ -2767,7 +2675,7 @@ Transform:
   - {fileID: 584386914}
   - {fileID: 556503890}
   m_Father: {fileID: 1379532632}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &674414157
 MonoBehaviour:
@@ -2908,10 +2816,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598188a5ab3d6ad49a1c8f10d721a538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
+  rotationSpeed: 0
   dampening: 2
-  gameManager: {fileID: 0}
-  planetIndex: 0
+  m_SpeedMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -2.4613662
+      outSlope: -2.4613662
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.933
+      value: 0.1
+      inSlope: -0.17017126
+      outSlope: -0.17017126
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: 0.01759422
+      outSlope: 0.01759422
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!23 &717572906
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3191,9 +3121,8 @@ GameObject:
   - component: {fileID: 862296887}
   - component: {fileID: 862296883}
   - component: {fileID: 862296886}
-  - component: {fileID: 862296885}
-  - component: {fileID: 862296882}
   - component: {fileID: 862296884}
+  - component: {fileID: 862296889}
   m_Layer: 0
   m_Name: Planet1Object
   m_TagString: Untagged
@@ -3201,29 +3130,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &862296882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114461735572470972, guid: 615937432803fb142abd4ac91f151e65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 862296881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1ba771ad5edbe14d9a2550d2626622d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planet1: {fileID: 862296882}
-  planet2: {fileID: 270519177}
-  planet3: {fileID: 984544777}
-  SelfObject: {fileID: 862296881}
-  Planet1Material: {fileID: 862296883}
-  planetrotationScript: {fileID: 880590046}
-  currentSpeed: 0
-  gameManager: {fileID: 1379532629}
-  selfMesh: {fileID: 862296883}
-  OnClickedAudio: {fileID: 115841322}
-  IWasClicked1: 0
 --- !u!23 &862296883
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3272,59 +3178,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &862296885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114102367060196900, guid: 615937432803fb142abd4ac91f151e65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 862296881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 862296882}
-        m_MethodName: Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &862296886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3374,6 +3227,29 @@ Transform:
   m_Father: {fileID: 880590048}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &862296889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 862296881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74a0860a970f594d9a0e0503d5853d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggeredEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  thisImage: {fileID: 0}
+  enabledCol: {r: 1, g: 1, b: 1, a: 1}
+  disabledCol: {r: 0.39, g: 0.39, b: 0.39, a: 1}
+  RotScript: {fileID: 880590046}
+  CurSpeed: 0
+  OnClickedAudio: {fileID: 115841322}
+  BaseScale: {x: 0, y: 0, z: 0}
 --- !u!1 &880590045
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,10 +3280,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598188a5ab3d6ad49a1c8f10d721a538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
+  rotationSpeed: 0
   dampening: 2
-  gameManager: {fileID: 0}
-  planetIndex: 0
+  m_SpeedMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -2.4613662
+      outSlope: -2.4613662
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.933
+      value: 0.1
+      inSlope: -0.17017126
+      outSlope: -0.17017126
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: 0.01759422
+      outSlope: 0.01759422
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!23 &880590047
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3577,9 +3475,8 @@ GameObject:
   - component: {fileID: 984544782}
   - component: {fileID: 984544778}
   - component: {fileID: 984544781}
-  - component: {fileID: 984544780}
-  - component: {fileID: 984544777}
   - component: {fileID: 984544779}
+  - component: {fileID: 984544784}
   m_Layer: 0
   m_Name: Planet3Object
   m_TagString: Untagged
@@ -3587,29 +3484,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &984544777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114310248992672720, guid: 615937432803fb142abd4ac91f151e65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 984544776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91f2a50acf2f3d34a88e53a79ae423c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planet1: {fileID: 862296882}
-  planet2: {fileID: 270519177}
-  planet3: {fileID: 984544777}
-  planetrotationScript: {fileID: 1565017439}
-  SelfObject: {fileID: 984544776}
-  Planet3Material: {fileID: 984544778}
-  currentSpeed: 0
-  selfMesh: {fileID: 984544778}
-  gameManager: {fileID: 1379532629}
-  IwasClicked3: 0
-  OnClickedAudio: {fileID: 393787169}
 --- !u!23 &984544778
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3658,59 +3532,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &984544780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114621331367581236, guid: 615937432803fb142abd4ac91f151e65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 984544776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 984544777}
-        m_MethodName: clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &984544781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3761,6 +3582,29 @@ Transform:
   m_Father: {fileID: 1565017440}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &984544784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 984544776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74a0860a970f594d9a0e0503d5853d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggeredEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  thisImage: {fileID: 0}
+  enabledCol: {r: 1, g: 1, b: 1, a: 1}
+  disabledCol: {r: 0.39, g: 0.39, b: 0.39, a: 1}
+  RotScript: {fileID: 1565017439}
+  CurSpeed: 0
+  OnClickedAudio: {fileID: 393787169}
+  BaseScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1010432423
 GameObject:
   m_ObjectHideFlags: 0
@@ -4736,7 +4580,7 @@ Transform:
   - {fileID: 1577680161}
   - {fileID: 802521007}
   m_Father: {fileID: 1379532632}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1379532628
 GameObject:
@@ -4749,7 +4593,6 @@ GameObject:
   - component: {fileID: 1379532632}
   - component: {fileID: 1379532631}
   - component: {fileID: 1379532630}
-  - component: {fileID: 1379532629}
   m_Layer: 0
   m_Name: '[ExperienceApp]'
   m_TagString: Untagged
@@ -4757,46 +4600,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1379532629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114603552489968674, guid: 615937432803fb142abd4ac91f151e65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1379532628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ec962e9fafba547a968c864bacffa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ValueChangesScript: {fileID: 283816745}
-  selfScript: {fileID: 0}
-  planetRotation: 0
-  planetPivots:
-  - {fileID: 880590045}
-  - {fileID: 2070381468}
-  - {fileID: 1565017438}
-  - {fileID: 717572904}
-  planetObjects: []
-  PlanetSettings: 
-  planetSpeed:
-  - 0
-  - 0
-  - 0
-  - 0
-  planet1: {fileID: 862296882}
-  planet2: {fileID: 270519177}
-  planet3: {fileID: 984544777}
-  planet4: {fileID: 563738661}
-  PlanetMaterials: []
-  currentPlanet: 0
-  Planet: {fileID: 0}
-  ChangeSpeed: 0
-  OnPlanet1: 0
-  OnPlanet2: 0
-  OnPlanet3: 0
-  OnPlanet4: 0
-  TimeRemaining: 300
 --- !u!114 &1379532630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4845,6 +4648,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1806715590}
   - {fileID: 674414156}
   - {fileID: 1330181516}
   - {fileID: 376622437}
@@ -5505,10 +5309,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598188a5ab3d6ad49a1c8f10d721a538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
+  rotationSpeed: 0
   dampening: 2
-  gameManager: {fileID: 0}
-  planetIndex: 0
+  m_SpeedMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -2.4613662
+      outSlope: -2.4613662
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.933
+      value: 0.1
+      inSlope: -0.17017126
+      outSlope: -0.17017126
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: 0.01759422
+      outSlope: 0.01759422
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &1565017440
 Transform:
   m_ObjectHideFlags: 0
@@ -5646,8 +5472,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 5
   dampening: 1
-  gameManager: {fileID: 0}
-  planetIndex: 0
+  m_SpeedMultiplierCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1600506052
 GameObject:
   m_ObjectHideFlags: 0
@@ -5986,7 +5816,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1676192831}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7, y: 0, z: 4.7}
+  m_LocalPosition: {x: 0, y: 0, z: 4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2117479498}
@@ -6061,8 +5891,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   dampening: 1
-  gameManager: {fileID: 0}
-  planetIndex: 0
+  m_SpeedMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -2.4613662
+      outSlope: -2.4613662
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: 0.01759422
+      outSlope: 0.01759422
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1720422558
 GameObject:
   m_ObjectHideFlags: 0
@@ -6594,6 +6440,76 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1773485843}
+--- !u!1 &1806715589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1806715590}
+  - component: {fileID: 1806715591}
+  m_Layer: 0
+  m_Name: _GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1806715590
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1806715589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1379532632}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1806715591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1806715589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ec962e9fafba547a968c864bacffa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ValueChangesScript: {fileID: 283816745}
+  selfScript: {fileID: 0}
+  planetRotation: 0
+  planetPivots:
+  - {fileID: 880590045}
+  - {fileID: 2070381468}
+  - {fileID: 1565017438}
+  - {fileID: 717572904}
+  planetObjects: []
+  PlanetSettings: 
+  planetSpeed:
+  - 0
+  - 0
+  - 0
+  - 0
+  planet1: {fileID: 0}
+  planet2: {fileID: 0}
+  planet3: {fileID: 0}
+  planet4: {fileID: 0}
+  PlanetMaterials: []
+  currentPlanet: 0
+  Planet: {fileID: 0}
+  ChangeSpeed: 0
+  OnPlanet1: 0
+  OnPlanet2: 0
+  OnPlanet3: 0
+  OnPlanet4: 0
+  AllPlanetControllers: []
+  ExperienceLength: 50
+  NormalizedTime: 0
 --- !u!1 &1828328874
 GameObject:
   m_ObjectHideFlags: 0
@@ -6732,7 +6648,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1379532632}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!108 &1851616495
 Light:
@@ -8444,10 +8360,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598188a5ab3d6ad49a1c8f10d721a538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
+  rotationSpeed: 0
   dampening: 2
-  gameManager: {fileID: 0}
-  planetIndex: 0
+  m_SpeedMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -2.4613662
+      outSlope: -2.4613662
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.933
+      value: 0.1
+      inSlope: -0.17017126
+      outSlope: -0.17017126
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: 0.01759422
+      outSlope: 0.01759422
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &2070381470
 Transform:
   m_ObjectHideFlags: 0
@@ -8652,7 +8590,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -8710,6 +8648,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 25
-  dampening: 0.5
-  gameManager: {fileID: 0}
-  planetIndex: 0
+  dampening: 1
+  m_SpeedMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -2.4613662
+      outSlope: -2.4613662
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: 0.01759422
+      outSlope: 0.01759422
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0

@@ -1,47 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class PlanetController : MonoBehaviour
+public class PlanetController : DiegeticButton
 {
-    public PlanetController[] otherPlanets;
-
-    public MeshRenderer Planet1Material;
-
-    public PlanetRotation planetrotationScript;
-    public float currentSpeed;
-
-    public GameManager gameManager;
-
-    public MeshRenderer selfMesh;
+    public PlanetRotation RotScript;
+    public float CurSpeed;
 
     public AudioSource OnClickedAudio;
+
+    public Vector3 BaseScale;
+
+    private float acceleratonTime = 0;
 
 // Use this for initialization
     void Start ()
     {
-
-        currentSpeed = planetrotationScript.rotationSpeed;
-        selfMesh.material = Planet1Material.material;
-        
+        BaseScale = transform.localScale;
     }
 
-    public void Clicked()
-    {
-        OnClickedAudio.Play(0);
-    }
     private void Update()
     {
-        if (gameManager.ChangeSpeed == true)
+    }
+
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        base.OnPointerClick(eventData);
+        OnClickedAudio.Play(0);
+        GameManager.Instance.SelectPlanet(gameObject);
+        StartCoroutine(AccelerateRoutine());
+    }
+
+    private IEnumerator AccelerateRoutine()
+    {
+        while (acceleratonTime < 3f)
         {
-            currentSpeed = gameManager.planetSpeed[0];
-            planetrotationScript.rotationSpeed = currentSpeed;
-
+            yield return new WaitForEndOfFrame();
+            acceleratonTime += Time.deltaTime;
+            RotScript.baseRotationSpeed = Mathf.Lerp(0, 10, acceleratonTime/3f);
         }
+    }
 
-        Planet1Material.material = selfMesh.material;
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        base.OnPointerEnter(eventData);
+    }
 
-
-
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        base.OnPointerExit(eventData);
     }
 }
