@@ -13,10 +13,6 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour {
 
     public static GameManager Instance;
-    public ValueChanges ValueChangesScript;
-
-    public float[] planetSpeed;
-
 
     public bool ChangeSpeed;
 
@@ -29,11 +25,16 @@ public class GameManager : MonoBehaviour {
     public float NormalizedTime;
     private float m_TimeRemaining;
 
-    [Header("Planet Scale and Material Variable:")]
+    [Header("Planet Scale and Material Variables:")]
     [SerializeField] private List<Vector3> m_PlanetScales;
     [SerializeField] private List<Material> m_PlanetMaterials;
     [SerializeField] private GameObject UICanvas;
     public GameObject SelectedPlanet;
+
+    [Header("Managers:")]
+    public IntroManager IntroMan;
+    public HeartbeatManager HeartMan;
+
     public delegate void PlanetSelected();
     public PlanetSelected PlanetWasSelected;
 
@@ -44,13 +45,14 @@ public class GameManager : MonoBehaviour {
 
         AllPlanetControllers = FindObjectsOfType<PlanetController>().ToList();
 
+        IntroMan = GetComponent<IntroManager>();
+        HeartMan = GetComponent<HeartbeatManager>();
+
         StartCoroutine(CountdownTimer());
     }
 
     public void SelectPlanet(GameObject selectedPlanet)
     {
-        ValueChangesScript.planet = selectedPlanet;
-        ValueChangesScript.planetPivot = selectedPlanet;
         SelectedPlanet = selectedPlanet;
         if (PlanetWasSelected != null)
         {
