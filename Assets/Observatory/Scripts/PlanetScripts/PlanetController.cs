@@ -29,6 +29,10 @@ public class PlanetController : DiegeticButton
         base.OnPointerClick(eventData);
         OnClickedAudio.Play(0);
         GameManager.Instance.SelectPlanet(gameObject);
+    }
+
+    public void PlanetDataSet()
+    {
         StartCoroutine(AccelerateRoutine());
     }
 

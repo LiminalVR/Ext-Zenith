@@ -27,7 +27,6 @@ public class Self : MonoBehaviour {
     public void OnClicked()
     {
         print(this.gameObject.name);
-        GameManager.planetPivots.Add(this.gameObject);
     }
     
 	// Update is called once per frame

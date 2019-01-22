@@ -168,10 +168,11 @@ public class ValueChanges : MonoBehaviour
  
     }
 
-
+    /*
     //SpeedChange Buttons
     public void SpeedChange1()
     {
+        
         if (gameManager.OnPlanet1 == true)
         {
             gameManager.ChangeSpeed = true;
@@ -192,7 +193,7 @@ public class ValueChanges : MonoBehaviour
             gameManager.ChangeSpeed = true;
             gameManager.planetSpeed[3] = speed1;
         }
-
+        
 
 
     }
@@ -289,7 +290,7 @@ public class ValueChanges : MonoBehaviour
             gameManager.planetSpeed[3] = speed5;
         }
     }
-    
+    */
   
 
 }
