@@ -8730,11 +8730,11 @@ MonoBehaviour:
   ExperienceLength: 300
   NormalizedTime: 0
   m_PlanetScales:
-  - {x: 1, y: 1, z: 1}
-  - {x: 2, y: 2, z: 2}
+  - {x: 2, y: 1, z: 1}
   - {x: 4, y: 4, z: 4}
+  - {x: 6, y: 6, z: 6}
+  - {x: 8, y: 8, z: 6}
   - {x: 8, y: 8, z: 8}
-  - {x: 16, y: 16, z: 16}
   m_PlanetMaterials:
   - {fileID: 2100000, guid: 96cd41aae118c964b8730838847454f8, type: 2}
   - {fileID: 2100000, guid: 8c8e361384f71b84788daaad28f8ab4f, type: 2}
