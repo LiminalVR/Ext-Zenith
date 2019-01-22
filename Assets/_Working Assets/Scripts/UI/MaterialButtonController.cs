@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MaterialButtonController : MonoBehaviour {
+public class MaterialButtonController : MonoBehaviour
+{
+    [SerializeField] private List<AudioSource> m_PooledAudioSources;
 
     // Use this for initialization
     void Start()
@@ -15,8 +17,14 @@ public class MaterialButtonController : MonoBehaviour {
         }
     }
 
-    private static void SetPlanetMaterial(GameObject go)
+    private void SetPlanetMaterial(GameObject go)
     {
+        foreach (var AS in m_PooledAudioSources)
+        {
+            if (AS.isPlaying) continue;
+            AS.Play();
+        }
+
         var curIndex = 0;
         for (var i = 0; i < go.transform.parent.childCount; i++)
         {
