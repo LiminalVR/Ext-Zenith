@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Liminal.Core.Fader;
 using Liminal.SDK.Core;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
@@ -73,7 +72,6 @@ public class GameManager : MonoBehaviour {
 
     public void SetPlanetMaterial(int index)
     {
-        print(index);
         if (index >= m_PlanetMaterials.Count)
         {
             return;
