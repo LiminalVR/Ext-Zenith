@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
     [Range(0,1)]
     public float NormalizedTime;
     private float m_TimeRemaining;
+    public SystemState curState;
 
     [Header("Planet Scale and Material Variables:")]
     [SerializeField] private List<Vector3> m_PlanetScales;
@@ -34,6 +35,15 @@ public class GameManager : MonoBehaviour {
     [Header("Managers:")]
     public IntroManager IntroMan;
     public HeartbeatManager HeartMan;
+
+    [System.Serializable]
+    public enum SystemState
+    {
+        Paused,
+        Playing,
+        Ending,
+        Ended,
+    };
 
     public delegate void PlanetSelected();
     public PlanetSelected PlanetWasSelected;
@@ -48,12 +58,17 @@ public class GameManager : MonoBehaviour {
         IntroMan = GetComponent<IntroManager>();
         HeartMan = GetComponent<HeartbeatManager>();
 
+        IntroMan.Init();
+
+        curState = SystemState.Playing;
+
         StartCoroutine(CountdownTimer());
     }
 
     public void SelectPlanet(GameObject selectedPlanet)
     {
         SelectedPlanet = selectedPlanet;
+
         if (PlanetWasSelected != null)
         {
             PlanetWasSelected.Invoke();
@@ -102,6 +117,9 @@ public class GameManager : MonoBehaviour {
 
         var finishedCount = 0;
         var safetyTimer = 0f;
+
+        curState = SystemState.Ending;
+
         while (true)
         {
             foreach (var planet in AllPlanetControllers)
@@ -121,14 +139,17 @@ public class GameManager : MonoBehaviour {
             safetyTimer+=Time.deltaTime;
 
             //done to stop experience lasting indefinitely if there's an issue
-            if (safetyTimer >= 30f)
+            if (safetyTimer >= 60f)
             {
                 break;
             }
             yield return new WaitForEndOfFrame();
         }
 
+        curState = SystemState.Ended;
+
         ScreenFader.Instance.FadeToBlack(2f);
+        FaderController.Instance.FadeToColor(2.5f, Color.black);
         yield return new WaitForSeconds(2.5f);
         ExperienceApp.End();
     }
