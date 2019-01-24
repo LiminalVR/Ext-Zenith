@@ -12,7 +12,13 @@ public class PlanetController : DiegeticButton
 
     public Vector3 BaseScale;
 
+    public int SizeIndex;
+    public int MaterialIndex;
+    public float SizeLerpTime;
+
     private float acceleratonTime = 0;
+
+    private Coroutine SizeRoutine;
 
 // Use this for initialization
     void Start ()
@@ -20,8 +26,28 @@ public class PlanetController : DiegeticButton
         BaseScale = transform.localScale;
     }
 
-    private void Update()
+    public void LerpToSize(Vector3 targetSize)
     {
+        if (SizeRoutine != null)
+        {
+            StopCoroutine(SizeRoutine);
+        }
+
+        SizeRoutine = StartCoroutine(SizeLerp(targetSize));
+    }
+
+    private IEnumerator SizeLerp(Vector3 targetSize)
+    {
+        var elapsedTime = 0f;
+        var startSize = transform.localScale;
+        while (elapsedTime < SizeLerpTime)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(startSize, targetSize, elapsedTime / SizeLerpTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        transform.localScale = targetSize;
     }
 
     public override void OnPointerClick(PointerEventData eventData)
@@ -29,9 +55,10 @@ public class PlanetController : DiegeticButton
         base.OnPointerClick(eventData);
         OnClickedAudio.Play(0);
         GameManager.Instance.SelectPlanet(gameObject);
+        GameManager.Instance.AcceptChanges();
     }
 
-    public void PlanetDataSet()
+    public void Init()
     {
         StartCoroutine(AccelerateRoutine());
     }

@@ -47,13 +47,13 @@ public class GameManager : MonoBehaviour {
 
     public delegate void PlanetSelected();
     public PlanetSelected PlanetWasSelected;
+    public delegate void PlanetStatChanged();
+    public PlanetStatChanged PlanetStatWasChanged;
 
     void Start ()
     {
         Instance = this;
         ChangeSpeed = false;
-
-        AllPlanetControllers = FindObjectsOfType<PlanetController>().ToList();
 
         IntroMan = GetComponent<IntroManager>();
         HeartMan = GetComponent<HeartbeatManager>();
@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour {
         }
 
         UICanvas.SetActive(true);
+        UICanvas.GetComponent<InteractableUIController>().Init();
     }
 
     public void SetPlanetScale(int index)
@@ -84,7 +85,8 @@ public class GameManager : MonoBehaviour {
             return;
         }
 
-        SelectedPlanet.transform.localScale = m_PlanetScales[index];
+        SelectedPlanet.GetComponent<PlanetController>().SizeIndex = index;
+        SelectedPlanet.GetComponent<PlanetController>().LerpToSize(m_PlanetScales[index]);
     }
 
     public void SetPlanetMaterial(int index)
@@ -93,15 +95,13 @@ public class GameManager : MonoBehaviour {
         {
             return;
         }
-
+        SelectedPlanet.GetComponent<PlanetController>().MaterialIndex = index;
         SelectedPlanet.GetComponent<MeshRenderer>().material = m_PlanetMaterials[index];
     }
 
     public void AcceptChanges()
     {
-        UICanvas.SetActive(false);
-
-        SelectedPlanet.GetComponent<PlanetController>().PlanetDataSet();
+        SelectedPlanet.GetComponent<PlanetController>().Init();
     }
 
     private IEnumerator CountdownTimer()

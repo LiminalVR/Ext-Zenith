@@ -15,7 +15,13 @@ public class IntroManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         GameManager.Instance.HeartMan.Init();
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         FaderController.Instance.FadeToColor(2, new Color(0, 0, 0, 0));
+
+        foreach (var planet in GameManager.Instance.AllPlanetControllers)
+        {
+            yield return new WaitForSeconds(5f);
+            planet.Init();
+        }
     }
 }
