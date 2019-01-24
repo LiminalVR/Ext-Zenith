@@ -12,7 +12,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 5000
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -26,7 +26,9 @@ Material:
     - _Cutoff: 0.5
     - _Opacity: 1
     - _node_435: 0
+    - _node_7219: 57.3
     - _node_7706: 1
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _FadeToColor: {r: 0, g: 0, b: 0, a: 1}
+    - _node_3443: {r: 0, g: 0.006491044, b: 0.9411765, a: 1}

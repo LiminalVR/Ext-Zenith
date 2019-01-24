@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviour {
         curState = SystemState.Ended;
 
         ScreenFader.Instance.FadeToBlack(2f);
+        FaderController.Instance.ChangeSize(new Vector3(200, 200, 200), 0.01f);
         FaderController.Instance.FadeToColor(2.5f, Color.black);
         yield return new WaitForSeconds(2.5f);
         ExperienceApp.End();

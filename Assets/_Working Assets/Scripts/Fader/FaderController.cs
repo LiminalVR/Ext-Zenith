@@ -18,6 +18,11 @@ public class FaderController : MonoBehaviour
         Instance = this;
     }
 
+    public void ChangeSize(Vector3 targetSize, float growthTime)
+    {
+        StartCoroutine(GrowToSize(targetSize, growthTime));
+    }
+
     public void FadeToColor(float timeToFade, Color targetColor)
     {
         if (m_FadeRoutine != null)
@@ -45,5 +50,17 @@ public class FaderController : MonoBehaviour
         var transColor = new Color(0,0,0,0);
 
         m_ThisMeshCollider.enabled = !targetColor.Equals(transColor);
+    }
+
+    private IEnumerator GrowToSize(Vector3 targetSize,float growthTime)
+    {
+        var elapsedTime = 0f;
+        var initialSize = transform.localScale;
+        while (elapsedTime < growthTime)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(initialSize, targetSize, elapsedTime / growthTime);
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

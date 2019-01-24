@@ -3612,7 +3612,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6ac3f4112197b7541ad4c2b100d16d30, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6970,7 +6970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TimeBetweenHeartbeats: 3
-  m_HeartbeatCurve:
+  m_HeartbeatDelayCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
@@ -6984,6 +6984,30 @@ MonoBehaviour:
       value: 5
       inSlope: 8.0401
       outSlope: 8.0401
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  m_HeartbeatVolumeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.75
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -8831,7 +8855,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9bc9cb335378de44ebb84e44eb6a2eac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.20000005
+      value: -1.52
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9bc9cb335378de44ebb84e44eb6a2eac, type: 3}
       propertyPath: m_LocalPosition.z

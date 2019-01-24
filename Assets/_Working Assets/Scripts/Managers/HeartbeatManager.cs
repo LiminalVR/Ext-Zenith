@@ -8,7 +8,8 @@ public class HeartbeatManager : MonoBehaviour
     public HeartbeatSound Heartbeat;
 
     [SerializeField] private float m_TimeBetweenHeartbeats;
-    [SerializeField] private AnimationCurve m_HeartbeatCurve;
+    [SerializeField] private AnimationCurve m_HeartbeatDelayCurve;
+    [SerializeField] private AnimationCurve m_HeartbeatVolumeCurve;
     [SerializeField] private AudioSource m_HeartbeatAS;
     [SerializeField] private float m_VolumeDecreaseSpeed;
 
@@ -20,20 +21,11 @@ public class HeartbeatManager : MonoBehaviour
 
     private IEnumerator HeartbeatRoutine()
     {
-        while (GameManager.Instance.curState == GameManager.SystemState.Playing)
+        while (GameManager.Instance.curState == GameManager.SystemState.Playing || GameManager.Instance.curState == GameManager.SystemState.Ending)
         {
             PlayHeartbeat();
             yield return new WaitForSeconds(m_TimeBetweenHeartbeats *
-                                            m_HeartbeatCurve.Evaluate(GameManager.Instance.NormalizedTime));
-        }
-
-        StartCoroutine(FadeHeartbeat());
-
-        while (GameManager.Instance.curState == GameManager.SystemState.Ending)
-        {
-            PlayHeartbeat();
-            yield return new WaitForSeconds(m_TimeBetweenHeartbeats *
-                                            m_HeartbeatCurve.Evaluate(GameManager.Instance.NormalizedTime));
+                                            m_HeartbeatDelayCurve.Evaluate(GameManager.Instance.NormalizedTime));
         }
 
         yield return new WaitForEndOfFrame();
@@ -43,22 +35,13 @@ public class HeartbeatManager : MonoBehaviour
     {
         if (m_HeartbeatAS == null) return;
 
+        m_HeartbeatAS.volume = m_HeartbeatVolumeCurve.Evaluate(GameManager.Instance.NormalizedTime);
         m_HeartbeatAS.Play();
 
         if (Heartbeat != null)
         {
+            //done as an event so that we can hook up external scripts to  call events.
             Heartbeat.Invoke();
-        }
-    }
-
-    private IEnumerator FadeHeartbeat()
-    {
-        while (m_HeartbeatAS.volume>0)
-        {
-            var newVol = m_HeartbeatAS.volume;
-            newVol = Mathf.Clamp(newVol - (m_VolumeDecreaseSpeed * Time.deltaTime), 0.1f, 1);
-            m_HeartbeatAS.volume = newVol;
-            yield return new WaitForEndOfFrame();
         }
     }
 }
