@@ -8,10 +8,17 @@ public class SliderController : MonoBehaviour
     [SerializeField] private List<Image> m_SliderMarks;
     [SerializeField] private Color m_UnselectedColor;
     [SerializeField] private Color m_SelectedColor;
+    [SerializeField] private Slider m_ThisSlider;
 
     private void Start()
     {
-        UpdateMarks(GetComponent<Slider>().value);
+        m_ThisSlider = GetComponent<Slider>();
+        UpdateMarks(m_ThisSlider.value);
+    }
+
+    private void Update()
+    {
+        UpdateMarks(m_ThisSlider.value);
     }
 
     public void UpdateMarks(float sliderValue)

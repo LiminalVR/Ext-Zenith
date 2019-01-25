@@ -9,7 +9,7 @@ public class InteractableUIController : MonoBehaviour
     private Coroutine m_DisableRoutine;
     private float m_ElapsedTime;
 
-    void Awake()
+    void Start()
     {
         GameManager.Instance.PlanetStatWasChanged += ResetTimer;
     }

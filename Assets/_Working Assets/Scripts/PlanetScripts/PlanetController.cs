@@ -16,9 +16,11 @@ public class PlanetController : DiegeticButton
     public int MaterialIndex;
     public float SizeLerpTime;
 
-    private float acceleratonTime = 0;
+    private float m_AcceleratonTime = 0;
 
-    private Coroutine SizeRoutine;
+    private Coroutine m_SizeRoutine;
+
+    private bool m_IsInteractive;
 
 // Use this for initialization
     void Start ()
@@ -28,12 +30,12 @@ public class PlanetController : DiegeticButton
 
     public void LerpToSize(Vector3 targetSize)
     {
-        if (SizeRoutine != null)
+        if (m_SizeRoutine != null)
         {
-            StopCoroutine(SizeRoutine);
+            StopCoroutine(m_SizeRoutine);
         }
 
-        SizeRoutine = StartCoroutine(SizeLerp(targetSize));
+        m_SizeRoutine = StartCoroutine(SizeLerp(targetSize));
     }
 
     private IEnumerator SizeLerp(Vector3 targetSize)
@@ -52,10 +54,17 @@ public class PlanetController : DiegeticButton
 
     public override void OnPointerClick(PointerEventData eventData)
     {
+        if (m_IsInteractive == false) return;
+
         base.OnPointerClick(eventData);
         OnClickedAudio.Play(0);
         GameManager.Instance.SelectPlanet(gameObject);
         GameManager.Instance.AcceptChanges();
+    }
+
+    public void SetInteractive(bool newState)
+    {
+        m_IsInteractive = newState;
     }
 
     public void Init()
@@ -65,11 +74,11 @@ public class PlanetController : DiegeticButton
 
     private IEnumerator AccelerateRoutine()
     {
-        while (acceleratonTime < 3f)
+        while (m_AcceleratonTime < 3f)
         {
             yield return new WaitForEndOfFrame();
-            acceleratonTime += Time.deltaTime;
-            RotScript.baseRotationSpeed = Mathf.Lerp(0, 10, acceleratonTime/3f);
+            m_AcceleratonTime += Time.deltaTime;
+            RotScript.baseRotationSpeed = Mathf.Lerp(0, 10, m_AcceleratonTime/3f);
         }
     }
 

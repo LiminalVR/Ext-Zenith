@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance;
 
-    public bool ChangeSpeed;
-
     [Space]
     public List<PlanetController> AllPlanetControllers;
 
@@ -24,7 +22,7 @@ public class GameManager : MonoBehaviour {
     [Range(0,1)]
     public float NormalizedTime;
     private float m_TimeRemaining;
-    public SystemState curState;
+    public SystemState CurState;
 
     [Header("Planet Scale and Material Variables:")]
     [SerializeField] private List<Vector3> m_PlanetScales;
@@ -40,6 +38,7 @@ public class GameManager : MonoBehaviour {
     public enum SystemState
     {
         Paused,
+        Revealing,
         Playing,
         Ending,
         Ended,
@@ -50,17 +49,16 @@ public class GameManager : MonoBehaviour {
     public delegate void PlanetStatChanged();
     public PlanetStatChanged PlanetStatWasChanged;
 
-    void Start ()
+    void OnEnable ()
     {
         Instance = this;
-        ChangeSpeed = false;
 
         IntroMan = GetComponent<IntroManager>();
         HeartMan = GetComponent<HeartbeatManager>();
 
         IntroMan.Init();
 
-        curState = SystemState.Playing;
+        CurState = SystemState.Revealing;
 
         StartCoroutine(CountdownTimer());
     }
@@ -108,6 +106,11 @@ public class GameManager : MonoBehaviour {
     {
         m_TimeRemaining = 0;
 
+        while (CurState == SystemState.Revealing)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         while (m_TimeRemaining < ExperienceLength)
         {
             m_TimeRemaining += Time.deltaTime;
@@ -118,7 +121,7 @@ public class GameManager : MonoBehaviour {
         var finishedCount = 0;
         var safetyTimer = 0f;
 
-        curState = SystemState.Ending;
+        CurState = SystemState.Ending;
 
         while (true)
         {
@@ -146,7 +149,7 @@ public class GameManager : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
 
-        curState = SystemState.Ended;
+        CurState = SystemState.Ended;
 
         ScreenFader.Instance.FadeToBlack(2f);
         FaderController.Instance.ChangeSize(new Vector3(200, 200, 200), 0.01f);

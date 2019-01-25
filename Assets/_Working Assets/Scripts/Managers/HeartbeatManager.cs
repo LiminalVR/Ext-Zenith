@@ -21,7 +21,12 @@ public class HeartbeatManager : MonoBehaviour
 
     private IEnumerator HeartbeatRoutine()
     {
-        while (GameManager.Instance.curState == GameManager.SystemState.Playing || GameManager.Instance.curState == GameManager.SystemState.Ending)
+        while (GameManager.Instance.CurState == GameManager.SystemState.Revealing)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        while (GameManager.Instance.CurState == GameManager.SystemState.Playing || GameManager.Instance.CurState == GameManager.SystemState.Ending)
         {
             PlayHeartbeat();
             yield return new WaitForSeconds(m_TimeBetweenHeartbeats *
