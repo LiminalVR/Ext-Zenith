@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
         UICanvas.GetComponent<InteractableUIController>().Init();
     }
 
-    public void SetPlanetScale(int index)
+    public void SetPlanetScale(int index, float lerpTime = 1)
     {
         if (index >= m_PlanetScales.Count)
         {
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour {
         }
 
         SelectedPlanet.GetComponent<PlanetController>().SizeIndex = index;
-        SelectedPlanet.GetComponent<PlanetController>().LerpToSize(m_PlanetScales[index]);
+        SelectedPlanet.GetComponent<PlanetController>().LerpToSize(m_PlanetScales[index], lerpTime);
     }
 
     public void SetPlanetMaterial(int index)

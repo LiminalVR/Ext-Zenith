@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class SizeSliderController : MonoBehaviour
 {
-    [SerializeField] private List<AudioSource> m_PooledAudioSources;
     [SerializeField] private Slider m_ThisSlider;
 
     private int m_CachedValue;
@@ -18,6 +17,7 @@ public class SizeSliderController : MonoBehaviour
 
     public void UpdateValues()
     {
+        
         m_ThisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().SizeIndex;
     }
 
@@ -35,21 +35,13 @@ public class SizeSliderController : MonoBehaviour
 
         m_CachedValue = Mathf.FloorToInt(sliderValue);
 
-        print("Setting size!");
         if (GameManager.Instance.PlanetStatWasChanged != null)
         {
-            print("UI interaction event called!");
             GameManager.Instance.PlanetStatWasChanged.Invoke();
-        }
-
-        foreach (var AS in m_PooledAudioSources)
-        {
-            if (AS.isPlaying) continue;
-            AS.Play();
         }
 
         var intVal = Mathf.FloorToInt(sliderValue);
         
-        GameManager.Instance.SetPlanetScale(intVal); 
+        GameManager.Instance.SetPlanetScale(intVal,1); 
     }
 }

@@ -16,8 +16,8 @@ public class InteractableUIController : MonoBehaviour
 
     public void Init()
     {
-        GetComponentInChildren<SizeSliderController>().UpdateValues();
-        GetComponentInChildren<MaterialSliderController>().UpdateValues();
+        GetComponentInChildren<SizeSliderController>(includeInactive: true).UpdateValues();
+        GetComponentInChildren<MaterialSliderController>(includeInactive: true).UpdateValues();
     }
 
     void OnEnable()

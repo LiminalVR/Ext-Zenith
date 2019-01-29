@@ -6,7 +6,6 @@ using Mathf = UnityEngine.Mathf;
 
 public class MaterialSliderController : MonoBehaviour
 {
-    [SerializeField] private List<AudioSource> m_PooledAudioSources;
     [SerializeField] private Slider m_ThisSlider;
 
     private int m_CachedValue;
@@ -39,12 +38,6 @@ public class MaterialSliderController : MonoBehaviour
         if (GameManager.Instance.PlanetStatWasChanged != null)
         {
             GameManager.Instance.PlanetStatWasChanged.Invoke();
-        }
-
-        foreach (var AS in m_PooledAudioSources)
-        {
-            if (AS.isPlaying) continue;
-            AS.Play();
         }
 
         var intVal = Mathf.FloorToInt(sliderValue);
