@@ -45,12 +45,8 @@ public class GameManager : MonoBehaviour {
         Ended,
     };
 
-    public delegate void PlanetSelected();
-    public PlanetSelected PlanetWasSelected;
     public delegate void PlanetStatChanged();
     public PlanetStatChanged PlanetStatWasChanged;
-    public delegate void UIHidden();
-    public UIHidden UIWasHidden;
 
     void OnEnable ()
     {
@@ -69,11 +65,6 @@ public class GameManager : MonoBehaviour {
     public void SelectPlanet(GameObject selectedPlanet)
     {
         SelectedPlanet = selectedPlanet;
-
-        if (PlanetWasSelected != null)
-        {
-            PlanetWasSelected.Invoke();
-        }
 
         UICanvas.SetActive(true);
         UICanvas.GetComponent<InteractableUIController>().Init();

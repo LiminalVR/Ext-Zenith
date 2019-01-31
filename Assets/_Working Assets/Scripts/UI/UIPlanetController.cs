@@ -8,6 +8,8 @@ public class UIPlanetController : MonoBehaviour {
 
     public void LerpToSize(Vector3 targetSize, float lerpTime = 1)
     {
+        if (!gameObject.activeSelf) return;
+
         if (m_SizeRoutine != null)
         {
             StopCoroutine(m_SizeRoutine);
