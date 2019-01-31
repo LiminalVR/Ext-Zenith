@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private List<Vector3> m_PlanetScales;
     [SerializeField] private List<Material> m_PlanetMaterials;
     [SerializeField] private GameObject UICanvas;
+    [SerializeField] private GameObject UIPlanet;
     public GameObject SelectedPlanet;
 
     [Header("Managers:")]
@@ -87,6 +88,10 @@ public class GameManager : MonoBehaviour {
 
         SelectedPlanet.GetComponent<PlanetController>().SizeIndex = index;
         SelectedPlanet.GetComponent<PlanetController>().LerpToSize(m_PlanetScales[index], lerpTime);
+
+        if(!UIPlanet.activeSelf) return;
+
+        UIPlanet.GetComponent<UIPlanetController>().LerpToSize(m_PlanetScales[index], lerpTime);
     }
 
     public void SetPlanetMaterial(int index)
@@ -97,6 +102,7 @@ public class GameManager : MonoBehaviour {
         }
         SelectedPlanet.GetComponent<PlanetController>().MaterialIndex = index;
         SelectedPlanet.GetComponent<MeshRenderer>().material = m_PlanetMaterials[index];
+        UIPlanet.GetComponentInChildren<MeshRenderer>().material = m_PlanetMaterials[index];
     }
 
     public void AcceptChanges()
