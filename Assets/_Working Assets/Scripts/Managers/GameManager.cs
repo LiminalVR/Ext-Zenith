@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour {
     public PlanetSelected PlanetWasSelected;
     public delegate void PlanetStatChanged();
     public PlanetStatChanged PlanetStatWasChanged;
+    public delegate void UIHidden();
+    public UIHidden UIWasHidden;
 
     void OnEnable ()
     {

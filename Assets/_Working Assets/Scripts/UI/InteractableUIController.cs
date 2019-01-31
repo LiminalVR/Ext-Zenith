@@ -44,5 +44,10 @@ public class InteractableUIController : MonoBehaviour
         m_ElapsedTime = 0;
         m_DisableRoutine = null;
         gameObject.SetActive(false);
+
+        if (GameManager.Instance.UIWasHidden != null)
+        {
+            GameManager.Instance.UIWasHidden.Invoke();
+        }
     }
 }
