@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractableUIController : MonoBehaviour
 {
     [SerializeField] private float m_TimeToWaitBeforeDisable;
+    [SerializeField] private List<Transform> m_TargetPoints;
 
     private Coroutine m_DisableRoutine;
     private float m_ElapsedTime;
@@ -18,6 +19,43 @@ public class InteractableUIController : MonoBehaviour
     {
         GetComponentInChildren<SizeSliderController>(includeInactive: true).UpdateValues();
         GetComponentInChildren<MaterialSliderController>(includeInactive: true).UpdateValues();
+
+        var closestPoint = m_TargetPoints[0];
+        var greatestValue = 0f;
+
+        foreach (var point in m_TargetPoints)
+        {
+            var forward = Camera.main.transform.forward;
+            var toOther = point.position - Camera.main.transform.position;
+
+            var dotVal = Vector3.Dot(forward, toOther);
+
+            if (!(dotVal > greatestValue)) continue;
+
+            greatestValue = dotVal;
+            closestPoint = point;
+        }
+
+        /*
+
+        foreach (var point in m_TargetPoints)
+        {
+            if (point == closestPoint)
+            {
+                point.parent.gameObject.SetActive(true);
+                continue;
+            }
+
+            point.parent.gameObject.SetActive(false);
+        }
+
+    */
+
+        transform.SetParent(closestPoint);
+
+        //transform.localEulerAngles = Vector3.zero;
+        transform.forward = -closestPoint.forward;
+        transform.localPosition = Vector3.zero;
     }
 
     void OnEnable()
