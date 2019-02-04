@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour {
 
         if(!UIPlanet.activeSelf) return;
 
-        UIPlanet.GetComponent<UIPlanetController>().LerpToSize(m_PlanetScales[index], lerpTime);
+        UIPlanet.GetComponent<UIPlanetController>().LerpToSize(m_PlanetScales[index], index, lerpTime);
     }
 
     public void SetPlanetMaterial(int index)

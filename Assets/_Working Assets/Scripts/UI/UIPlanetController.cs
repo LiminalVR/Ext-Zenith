@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIPlanetController : MonoBehaviour {
+public class UIPlanetController : MonoBehaviour
+{
 
+    [SerializeField] private AnimationCurve m_DividerCurve;
     private Coroutine m_SizeRoutine;
 
-    public void LerpToSize(Vector3 targetSize, float lerpTime = 1)
+    public void LerpToSize(Vector3 targetSize, int index, float lerpTime = 1)
     {
         if (!gameObject.activeSelf) return;
 
@@ -15,15 +17,15 @@ public class UIPlanetController : MonoBehaviour {
             StopCoroutine(m_SizeRoutine);
         }
 
-        m_SizeRoutine = StartCoroutine(SizeLerp(targetSize, lerpTime));
+        m_SizeRoutine = StartCoroutine(SizeLerp(targetSize, index, lerpTime));
     }
 
-    private IEnumerator SizeLerp(Vector3 targetSize, float lerpTime = 1)
+    private IEnumerator SizeLerp(Vector3 targetSize, int index, float lerpTime = 1)
     {
         var elapsedTime = 0f;
         var startSize = transform.localScale;
 
-        targetSize /= 4f;
+        targetSize /= m_DividerCurve.Evaluate(index);
 
         while (elapsedTime < lerpTime)
         {

@@ -36,24 +36,8 @@ public class InteractableUIController : MonoBehaviour
             closestPoint = point;
         }
 
-        /*
-
-        foreach (var point in m_TargetPoints)
-        {
-            if (point == closestPoint)
-            {
-                point.parent.gameObject.SetActive(true);
-                continue;
-            }
-
-            point.parent.gameObject.SetActive(false);
-        }
-
-    */
-
         transform.SetParent(closestPoint);
 
-        //transform.localEulerAngles = Vector3.zero;
         transform.forward = -closestPoint.forward;
         transform.localPosition = Vector3.zero;
     }
