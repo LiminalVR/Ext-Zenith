@@ -5999,7 +5999,7 @@ MonoBehaviour:
   m_Script: {fileID: 403216476, guid: 27ea3119a82e0444d88b007908225fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AppData: {fileID: 4900000, guid: 1a806f98b6fa107459211d615d5a19ea, type: 3}
+  m_AppData: {fileID: 4900000, guid: 02041a357027f2f4ab0e7272ae9603df, type: 3}
   m_AssetLookup: {fileID: 0}
   m_RootGameObjects:
   - {fileID: 0}
@@ -7255,7 +7255,7 @@ MonoBehaviour:
   - {fileID: 270519184}
   - {fileID: 984544784}
   - {fileID: 563738668}
-  ExperienceLength: 180
+  ExperienceLength: 240
   NormalizedTime: 0
   CurState: 0
   m_PlanetScales:
@@ -7393,15 +7393,15 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 80
-      inSlope: -2.4613662
-      outSlope: -2.4613662
+      value: 40
+      inSlope: -97.74281
+      outSlope: -97.74281
       tangentMode: 0
     - serializedVersion: 2
-      time: 1
-      value: 15
-      inSlope: 0.01759422
-      outSlope: 0.01759422
+      time: 0.9979248
+      value: 5
+      inSlope: -6.280092
+      outSlope: -6.280092
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
