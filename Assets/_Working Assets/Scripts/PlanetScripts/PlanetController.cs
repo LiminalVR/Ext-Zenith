@@ -10,7 +10,8 @@ public class PlanetController : DiegeticButton
 
     public AudioSource OnClickedAudio;
 
-    public Vector3 BaseScale;
+    [Tooltip("Hacky code used to ensure we can conrol the relative scales of objects easily.")]
+    public AnimationCurve ScaleMultiplierCurve = AnimationCurve.Linear(0, 1, 1, 1);
 
     public int SizeIndex;
     public int MaterialIndex;
@@ -26,7 +27,7 @@ public class PlanetController : DiegeticButton
 // Use this for initialization
     void Start ()
     {
-        BaseScale = transform.localScale;
+        
     }
 
     public void LerpToSize(Vector3 targetSize, float lerpTime = 1)
@@ -43,14 +44,16 @@ public class PlanetController : DiegeticButton
     {
         var elapsedTime = 0f;
         var startSize = transform.localScale;
+
+        var multiplier = ScaleMultiplierCurve.Evaluate(SizeIndex);
         while (elapsedTime < lerpTime)
         {
             elapsedTime += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(startSize, targetSize, elapsedTime / lerpTime);
+            transform.localScale = Vector3.Lerp(startSize, targetSize * multiplier, elapsedTime / lerpTime);
             yield return new WaitForEndOfFrame();
         }
 
-        transform.localScale = targetSize;
+        transform.localScale = targetSize * multiplier;
     }
 
     public override void OnPointerClick(PointerEventData eventData)
