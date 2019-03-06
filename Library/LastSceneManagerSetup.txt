@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Observatory/Scenes/Alex.unity
-  isLoaded: 1
-  isActive: 1
