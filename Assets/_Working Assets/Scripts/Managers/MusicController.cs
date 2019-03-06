@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MusicController : MonoBehaviour
 {
-    [SerializeField] private AnimationCurve m_VolumeCurve;
-    [SerializeField] private AudioSource m_AudioSource;
+    [SerializeField] private AnimationCurve _volumeCurve;
+    [SerializeField] private AudioSource _audioSource;
 
     // Update is called once per frame
     void Update ()
     {
-        if (m_AudioSource == null) return;
+        if (_audioSource == null) return;
 
-        m_AudioSource.volume = m_VolumeCurve.Evaluate(GameManager.Instance.NormalizedTime);
+        _audioSource.volume = _volumeCurve.Evaluate(GameManager.Instance.NormalizedTime);
     }
 }

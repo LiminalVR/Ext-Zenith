@@ -6,24 +6,24 @@ using Mathf = UnityEngine.Mathf;
 
 public class MaterialSliderController : MonoBehaviour
 {
-    [SerializeField] private Slider m_ThisSlider;
+    [SerializeField] private Slider _thisSlider;
 
     private int m_CachedValue;
 
     private void OnEnable()
     {
-        m_ThisSlider = GetComponent<Slider>();
+        _thisSlider = GetComponent<Slider>();
         UpdateValues();
     }
 
     public void UpdateValues()
     {
-        m_ThisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().MaterialIndex;
+        _thisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().MaterialIndex;
     }
 
     private void Update()
     {
-        SetPlanetMaterial(m_ThisSlider.value);
+        SetPlanetMaterial(_thisSlider.value);
     }
 
     public void SetPlanetMaterial(float sliderValue)
@@ -40,8 +40,8 @@ public class MaterialSliderController : MonoBehaviour
             GameManager.Instance.PlanetStatWasChanged.Invoke();
         }
 
-        var intVal = Mathf.FloorToInt(sliderValue);
+        var _intVal = Mathf.FloorToInt(sliderValue);
 
-        GameManager.Instance.SetPlanetMaterial(intVal);
+        GameManager.Instance.SetPlanetMaterial(_intVal);
     }
 }

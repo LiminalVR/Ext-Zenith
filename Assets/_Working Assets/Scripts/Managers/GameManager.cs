@@ -9,7 +9,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-
 public class GameManager : MonoBehaviour {
 
     public static GameManager Instance;
@@ -25,10 +24,11 @@ public class GameManager : MonoBehaviour {
     public SystemState CurState;
 
     [Header("Planet Scale and Material Variables:")]
-    [SerializeField] private List<Vector3> m_PlanetScales;
-    [SerializeField] private List<Material> m_PlanetMaterials;
-    [SerializeField] private GameObject UICanvas;
-    [SerializeField] private GameObject UIPlanet;
+    
+    [SerializeField] private List<Vector3> _planetScales;
+    [SerializeField] private List<Material> _planetMaterials;
+    [SerializeField] private GameObject _uiCanvas;
+    [SerializeField] private GameObject _uiPlanet;
     public GameObject SelectedPlanet;
 
     [Header("Managers:")]
@@ -66,34 +66,34 @@ public class GameManager : MonoBehaviour {
     {
         SelectedPlanet = selectedPlanet;
 
-        UICanvas.SetActive(true);
-        UICanvas.GetComponent<InteractableUIController>().Init();
+        _uiCanvas.SetActive(true);
+        _uiCanvas.GetComponent<InteractableUIController>().Init();
     }
 
     public void SetPlanetScale(int index, float lerpTime = 1)
     {
-        if (index >= m_PlanetScales.Count)
+        if (index >= _planetScales.Count)
         {
             return;
         }
 
         SelectedPlanet.GetComponent<PlanetController>().SizeIndex = index;
-        SelectedPlanet.GetComponent<PlanetController>().LerpToSize(m_PlanetScales[index], lerpTime);
+        SelectedPlanet.GetComponent<PlanetController>().LerpToSize(_planetScales[index], lerpTime);
 
-        if(!UIPlanet.activeSelf) return;
+        if(!_uiPlanet.activeSelf) return;
 
-        UIPlanet.GetComponent<UIPlanetController>().LerpToSize(m_PlanetScales[index], index, lerpTime);
+        _uiPlanet.GetComponent<UIPlanetController>().LerpToSize(_planetScales[index], index, lerpTime);
     }
 
     public void SetPlanetMaterial(int index)
     {
-        if (index >= m_PlanetMaterials.Count)
+        if (index >= _planetMaterials.Count)
         {
             return;
         }
         SelectedPlanet.GetComponent<PlanetController>().MaterialIndex = index;
-        SelectedPlanet.GetComponent<MeshRenderer>().material = m_PlanetMaterials[index];
-        UIPlanet.GetComponentInChildren<MeshRenderer>().material = m_PlanetMaterials[index];
+        SelectedPlanet.GetComponent<MeshRenderer>().material = _planetMaterials[index];
+        _uiPlanet.GetComponentInChildren<MeshRenderer>().material = _planetMaterials[index];
     }
 
     public void AcceptChanges()
@@ -117,8 +117,8 @@ public class GameManager : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
 
-        var finishedCount = 0;
-        var safetyTimer = 0f;
+        var _finishedCount = 0;
+        var _safetyTimer = 0f;
 
         CurState = SystemState.Ending;
 
@@ -126,22 +126,22 @@ public class GameManager : MonoBehaviour {
         {
             foreach (var planet in AllPlanetControllers)
             {
-                var pRot = planet.transform.eulerAngles.y;
-                if ((pRot < 359)) continue;
-                planet.GetComponentInParent<PlanetRotation>().baseRotationSpeed = 0;
-                finishedCount++;
+                var _pRot = planet.transform.eulerAngles.y;
+                if ((_pRot < 359)) continue;
+                planet.GetComponentInParent<PlanetRotation>().BaseRotationSpeed = 0;
+                _finishedCount++;
             }
 
-            if (finishedCount >= AllPlanetControllers.Count)
+            if (_finishedCount >= AllPlanetControllers.Count)
             {
                 break;
             }
 
-            finishedCount = 0;
-            safetyTimer+=Time.deltaTime;
+            _finishedCount = 0;
+            _safetyTimer+=Time.deltaTime;
 
             //done to stop experience lasting indefinitely if there's an issue
-            if (safetyTimer >= 60f)
+            if (_safetyTimer >= 60f)
             {
                 break;
             }

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class UIPlanetController : MonoBehaviour
 {
-
-    [SerializeField] private AnimationCurve m_DividerCurve;
+    [SerializeField] private AnimationCurve _dividerCurve;
     private Coroutine m_SizeRoutine;
 
     public void LerpToSize(Vector3 targetSize, int index, float lerpTime = 1)
@@ -22,15 +21,15 @@ public class UIPlanetController : MonoBehaviour
 
     private IEnumerator SizeLerp(Vector3 targetSize, int index, float lerpTime = 1)
     {
-        var elapsedTime = 0f;
-        var startSize = transform.localScale;
+        var _elapsedTime = 0f;
+        var _startSize = transform.localScale;
 
-        targetSize /= m_DividerCurve.Evaluate(index);
+        targetSize /= _dividerCurve.Evaluate(index);
 
-        while (elapsedTime < lerpTime)
+        while (_elapsedTime < lerpTime)
         {
-            elapsedTime += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(startSize, targetSize, elapsedTime / lerpTime);
+            _elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(_startSize, targetSize, _elapsedTime / lerpTime);
             yield return new WaitForEndOfFrame();
         }
 

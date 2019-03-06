@@ -7,7 +7,6 @@ public class PlanetController : DiegeticButton
 {
     public PlanetRotation RotScript;
     public float StartSpeed;
-
     public AudioSource OnClickedAudio;
 
     [Tooltip("Hacky code used to ensure we can conrol the relative scales of objects easily.")]
@@ -22,14 +21,9 @@ public class PlanetController : DiegeticButton
 
     private bool m_IsInteractive;
 
-    private Coroutine accellRoutine;
+    private Coroutine m_AccellRoutine;
 
 // Use this for initialization
-    void Start ()
-    {
-        
-    }
-
     public void LerpToSize(Vector3 targetSize, float lerpTime = 1)
     {
         if (m_SizeRoutine != null)
@@ -42,18 +36,18 @@ public class PlanetController : DiegeticButton
 
     private IEnumerator SizeLerp(Vector3 targetSize, float lerpTime =1)
     {
-        var elapsedTime = 0f;
-        var startSize = transform.localScale;
+        var _elapsedTime = 0f;
+        var _startSize = transform.localScale;
+        var _multiplier = ScaleMultiplierCurve.Evaluate(SizeIndex);
 
-        var multiplier = ScaleMultiplierCurve.Evaluate(SizeIndex);
-        while (elapsedTime < lerpTime)
+        while (_elapsedTime < lerpTime)
         {
-            elapsedTime += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(startSize, targetSize * multiplier, elapsedTime / lerpTime);
+            _elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(_startSize, targetSize * _multiplier, _elapsedTime / lerpTime);
             yield return new WaitForEndOfFrame();
         }
 
-        transform.localScale = targetSize * multiplier;
+        transform.localScale = targetSize * _multiplier;
     }
 
     public override void OnPointerClick(PointerEventData eventData)
@@ -61,7 +55,7 @@ public class PlanetController : DiegeticButton
         if (m_IsInteractive == false) return;
 
         base.OnPointerClick(eventData);
-        //OnClickedAudio.Play(0);
+
         GameManager.Instance.SelectPlanet(gameObject);
         GameManager.Instance.AcceptChanges();
         Init();
@@ -74,9 +68,9 @@ public class PlanetController : DiegeticButton
 
     public void Init()
     {
-        if (accellRoutine != null) return;
+        if (m_AccellRoutine != null) return;
         
-        accellRoutine = StartCoroutine(AccelerateRoutine());
+        m_AccellRoutine = StartCoroutine(AccelerateRoutine());
     }
 
     private IEnumerator AccelerateRoutine()
@@ -85,7 +79,7 @@ public class PlanetController : DiegeticButton
         {
             yield return new WaitForEndOfFrame();
             m_AcceleratonTime += Time.deltaTime;
-            RotScript.baseRotationSpeed = Mathf.Lerp(0, StartSpeed, m_AcceleratonTime/3f);
+            RotScript.BaseRotationSpeed = Mathf.Lerp(0, StartSpeed, m_AcceleratonTime/3f);
         }
     }
 

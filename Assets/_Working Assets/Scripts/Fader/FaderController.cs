@@ -35,31 +35,32 @@ public class FaderController : MonoBehaviour
 
     private IEnumerator Fade(float timeToFade, Color targetColor)
     {
-        float elapsedTime = 0;
-        var startColor = m_ThisMaterial.GetColor("_Color");
-        var lerpColor = startColor;
+        float _elapsedTime = 0;
+        var _startColor = m_ThisMaterial.GetColor("_Color");
+        var _lerpColor = _startColor;
 
-        while (elapsedTime < timeToFade)
+        while (_elapsedTime < timeToFade)
         { 
-            elapsedTime += Time.deltaTime;
-            lerpColor = Color.Lerp(startColor, targetColor, elapsedTime / timeToFade);
-            m_ThisMaterial.SetColor("_Color", lerpColor);
+            _elapsedTime += Time.deltaTime;
+            _lerpColor = Color.Lerp(_startColor, targetColor, _elapsedTime / timeToFade);
+            m_ThisMaterial.SetColor("_Color", _lerpColor);
             yield return new WaitForEndOfFrame();
         }
 
-        var transColor = new Color(0,0,0,0);
+        var _transColor = new Color(0,0,0,0);
 
-        m_ThisMeshCollider.enabled = !targetColor.Equals(transColor);
+        m_ThisMeshCollider.enabled = !targetColor.Equals(_transColor);
     }
 
     private IEnumerator GrowToSize(Vector3 targetSize,float growthTime)
     {
-        var elapsedTime = 0f;
-        var initialSize = transform.localScale;
-        while (elapsedTime < growthTime)
+        var _elapsedTime = 0f;
+        var _initialSize = transform.localScale;
+
+        while (_elapsedTime < growthTime)
         {
-            elapsedTime += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(initialSize, targetSize, elapsedTime / growthTime);
+            _elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(_initialSize, targetSize, _elapsedTime / growthTime);
             yield return new WaitForEndOfFrame();
         }
     }

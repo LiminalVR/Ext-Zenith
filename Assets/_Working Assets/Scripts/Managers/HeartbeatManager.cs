@@ -7,11 +7,11 @@ public class HeartbeatManager : MonoBehaviour
     public delegate void HeartbeatSound();
     public HeartbeatSound Heartbeat;
 
-    [SerializeField] private List<AudioSource> m_PooledHeartbeatSources;
-    [SerializeField] private AnimationCurve m_HeartbeatBPMCurve;
-    [SerializeField] private AnimationCurve m_HeartbeatVolumeCurve;
-    [SerializeField] private AudioSource m_HeartbeatAS;
-    [SerializeField] private float m_VolumeDecreaseSpeed;
+    [SerializeField] private List<AudioSource> _pooledHeartbeatSources;
+    [SerializeField] private AnimationCurve _heartbeatBPMCurve;
+    [SerializeField] private AnimationCurve _heartbeatVolumeCurve;
+    [SerializeField] private AudioSource _heartbeatAS;
+    [SerializeField] private float _volumeDecreaseSpeed;
 
     // Use this for initialization
     public void Init ()
@@ -29,7 +29,7 @@ public class HeartbeatManager : MonoBehaviour
         while (GameManager.Instance.CurState == GameManager.SystemState.Playing || GameManager.Instance.CurState == GameManager.SystemState.Ending)
         {
             PlayHeartbeat();
-            yield return new WaitForSeconds(60f/m_HeartbeatBPMCurve.Evaluate(GameManager.Instance.NormalizedTime));
+            yield return new WaitForSeconds(60f/_heartbeatBPMCurve.Evaluate(GameManager.Instance.NormalizedTime));
         }
 
         yield return new WaitForEndOfFrame();
@@ -37,11 +37,11 @@ public class HeartbeatManager : MonoBehaviour
 
     private void PlayHeartbeat()
     {
-        foreach (var HB in m_PooledHeartbeatSources)
+        foreach (var HB in _pooledHeartbeatSources)
         {
             if(HB.isPlaying) continue;
 
-            HB.volume = m_HeartbeatVolumeCurve.Evaluate(GameManager.Instance.NormalizedTime);
+            HB.volume = _heartbeatVolumeCurve.Evaluate(GameManager.Instance.NormalizedTime);
             HB.Play();
         }
 

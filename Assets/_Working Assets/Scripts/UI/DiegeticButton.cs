@@ -10,16 +10,15 @@ public class DiegeticButton : MonoBehaviour,IPointerClickHandler,IPointerEnterHa
 {
     public UnityEvent TriggeredEvents;
     
-    [SerializeField] private Image thisImage;
+    [SerializeField] private Image _thisImage;
+    [SerializeField] private Color _enabledCol = new Color(1, 1, 1, 1);
+    [SerializeField] private Color _disabledCol = new Color(0.39f, 0.39f, 0.39f, 1);
 
-    [SerializeField] private Color enabledCol = new Color(1, 1, 1, 1);
-    [SerializeField] private Color disabledCol = new Color(0.39f, 0.39f, 0.39f, 1);
-
-    private bool _interactable = true;
+    private bool m_Interactable = true;
 
     public virtual void OnPointerClick(PointerEventData eventData)
     {
-        if (_interactable == false)
+        if (m_Interactable == false)
         {
             return;
         }
@@ -39,29 +38,19 @@ public class DiegeticButton : MonoBehaviour,IPointerClickHandler,IPointerEnterHa
 
     public virtual void SetupButton(Sprite nSprite)
     {
-        if (thisImage == null)
+        if (_thisImage == null)
         {
             return;
         }
 
-        thisImage.sprite = nSprite;
+        _thisImage.sprite = nSprite;
     }
 
     public virtual void SetInteractable(bool nState)
     {
-        _interactable = nState;
+        m_Interactable = nState;
 
-        //if nsState == true use the enabled color, else use the disabled color.
-
-        GetComponent<MeshRenderer>().material.color = nState ? enabledCol : disabledCol;
+        //if nState == true use the enabled color, else use the disabled color.
+        GetComponent<MeshRenderer>().material.color = nState ? _enabledCol : _disabledCol;
     }
-
-    [ContextMenu("Click")]
-    public virtual void TestClick()
-    {
-        TriggeredEvents.Invoke();
-    }
-
-   
-    //setup to display text on hover and setup image stuff.
 }

@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class PlanetRotation : MonoBehaviour
 {
+    public float BaseRotationSpeed;
+    public float RotSpeed;
+    public float Dampening;
 
-    public float baseRotationSpeed;
-    public float rotSpeed;
-    public float dampening;
-    [SerializeField] private AnimationCurve m_SpeedMultiplierCurve;
+    [SerializeField] private AnimationCurve _speedMultiplierCurve;
 
-    private float slowDownTime=0;
+    private float m_SlowDownTime=0;
 
 
     // Update is called once per frame
     void Update()
     {
-        rotSpeed = baseRotationSpeed * m_SpeedMultiplierCurve.Evaluate(GameManager.Instance.NormalizedTime);
-        transform.Rotate((Vector3.up * rotSpeed) * (Time.deltaTime * dampening), Space.Self);
-
-
+        RotSpeed = BaseRotationSpeed * _speedMultiplierCurve.Evaluate(GameManager.Instance.NormalizedTime);
+        transform.Rotate((Vector3.up * RotSpeed) * (Time.deltaTime * Dampening), Space.Self);
     }
 }
 

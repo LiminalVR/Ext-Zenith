@@ -5,25 +5,25 @@ using UnityEngine.UI;
 
 public class SizeSliderController : MonoBehaviour
 {
-    [SerializeField] private Slider m_ThisSlider;
+    [SerializeField] private Slider _thisSlider;
 
     private int m_CachedValue;
 
     private void OnEnable()
     {
-        m_ThisSlider = GetComponent<Slider>();
+        _thisSlider = GetComponent<Slider>();
         UpdateValues();
     }
 
     public void UpdateValues()
     {
         
-        m_ThisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().SizeIndex;
+        _thisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().SizeIndex;
     }
 
     private void Update()
     {
-        SetPlanetSize(m_ThisSlider.value);
+        SetPlanetSize(_thisSlider.value);
     }
 
     public void SetPlanetSize(float sliderValue)
@@ -40,8 +40,8 @@ public class SizeSliderController : MonoBehaviour
             GameManager.Instance.PlanetStatWasChanged.Invoke();
         }
 
-        var intVal = Mathf.FloorToInt(sliderValue);
+        var _intVal = Mathf.FloorToInt(sliderValue);
         
-        GameManager.Instance.SetPlanetScale(intVal,1); 
+        GameManager.Instance.SetPlanetScale(_intVal,1); 
     }
 }

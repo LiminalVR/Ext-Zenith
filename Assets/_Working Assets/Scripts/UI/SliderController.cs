@@ -5,29 +5,29 @@ using UnityEngine.UI;
 
 public class SliderController : MonoBehaviour
 {
-    [SerializeField] private List<Image> m_SliderMarks;
-    [SerializeField] private Color m_UnselectedColor;
-    [SerializeField] private Color m_SelectedColor;
-    [SerializeField] private Slider m_ThisSlider;
+    [SerializeField] private List<Image> _sliderMarks;
+    [SerializeField] private Color _unselectedColor;
+    [SerializeField] private Color _selectedColor;
+    [SerializeField] private Slider _thisSlider;
 
     private void Start()
     {
-        m_ThisSlider = GetComponent<Slider>();
-        UpdateMarks(m_ThisSlider.value);
+        _thisSlider = GetComponent<Slider>();
+        UpdateMarks(_thisSlider.value);
     }
 
     private void Update()
     {
-        UpdateMarks(m_ThisSlider.value);
+        UpdateMarks(_thisSlider.value);
     }
 
     public void UpdateMarks(float sliderValue)
     {
-        var intVal = Mathf.FloorToInt(sliderValue);
+        var _intVal = Mathf.FloorToInt(sliderValue);
 
-        for (var i = 0; i < m_SliderMarks.Count; i++)
+        for (var i = 0; i < _sliderMarks.Count; i++)
         {
-            m_SliderMarks[i].color = i == intVal ? m_SelectedColor : m_UnselectedColor;
+            _sliderMarks[i].color = i == _intVal ? _selectedColor : _unselectedColor;
         }
     }
 }
