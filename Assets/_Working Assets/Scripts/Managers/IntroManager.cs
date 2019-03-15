@@ -42,7 +42,7 @@ public class IntroManager : MonoBehaviour
 
         foreach (var planet in GameManager.Instance.AllPlanetControllers)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
             planet.Init();
         }
     }
