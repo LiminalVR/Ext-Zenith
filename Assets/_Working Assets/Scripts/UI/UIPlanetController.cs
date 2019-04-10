@@ -7,6 +7,10 @@ public class UIPlanetController : MonoBehaviour
     [SerializeField] private AnimationCurve _dividerCurve;
     private Coroutine m_SizeRoutine;
 
+    private void Start()
+    {
+    }
+
     public void LerpToSize(Vector3 targetSize, int index, float lerpTime = 1)
     {
         if (!gameObject.activeSelf) return;

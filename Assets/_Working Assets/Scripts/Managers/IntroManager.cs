@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class IntroManager : MonoBehaviour
 {
+    public List<PlanetTiming> PlanetTimings;
+
+    [System.Serializable]
+    public class PlanetTiming
+    {
+        public PlanetController Planet;
+        public float delay;
+    }
 
 	// Use this for initialization
 	public void Init ()
@@ -40,10 +48,10 @@ public class IntroManager : MonoBehaviour
             planet.SetInteractive(true);
         }
 
-        foreach (var planet in GameManager.Instance.AllPlanetControllers)
+        foreach (var item in PlanetTimings)
         {
-            yield return new WaitForSeconds(2f);
-            planet.Init();
+            yield return new WaitForSeconds(item.delay);
+            item.Planet.Init();
         }
     }
 }

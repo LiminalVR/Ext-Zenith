@@ -43,5 +43,6 @@ public class MaterialSliderController : MonoBehaviour
         var _intVal = Mathf.FloorToInt(sliderValue);
 
         GameManager.Instance.SetPlanetMaterial(_intVal);
+        GameManager.Instance.UpdateAllCanvasValues();
     }
 }

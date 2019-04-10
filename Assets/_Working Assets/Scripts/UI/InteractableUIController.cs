@@ -12,14 +12,14 @@ public class InteractableUIController : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.PlanetStatWasChanged += ResetTimer;
+        //GameManager.Instance.PlanetStatWasChanged += ResetTimer;
     }
 
     public void Init()
     {
         GetComponentInChildren<SizeSliderController>(includeInactive: true).UpdateValues();
         GetComponentInChildren<MaterialSliderController>(includeInactive: true).UpdateValues();
-
+        /*
         var closestPoint = m_TargetPoints[0];
         var greatestValue = 0f;
 
@@ -40,13 +40,14 @@ public class InteractableUIController : MonoBehaviour
 
         transform.forward = -closestPoint.forward;
         transform.localPosition = Vector3.zero;
+        */
     }
 
     void OnEnable()
     {
         if (m_DisableRoutine == null)
         {
-            m_DisableRoutine = StartCoroutine(DisableTimer());
+            //m_DisableRoutine = StartCoroutine(DisableTimer());
         }
     }
 

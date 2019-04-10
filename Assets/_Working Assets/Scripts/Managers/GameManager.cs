@@ -23,13 +23,17 @@ public class GameManager : MonoBehaviour {
     private float m_TimeRemaining;
     public SystemState CurState;
 
+ 
+
     [Header("Planet Scale and Material Variables:")]
-    
     [SerializeField] private List<Vector3> _planetScales;
     [SerializeField] private List<Material> _planetMaterials;
-    [SerializeField] private GameObject _uiCanvas;
-    [SerializeField] private GameObject _uiPlanet;
+    [SerializeField] private List<GameObject> _uiCanvasList;
+    [SerializeField] private List<UIPlanetController> _uiPlanets;
     public GameObject SelectedPlanet;
+
+    [Header("Misc")]
+    [SerializeField] private MusicController _musicController;
 
     [Header("Managers:")]
     public IntroManager IntroMan;
@@ -48,6 +52,8 @@ public class GameManager : MonoBehaviour {
     public delegate void PlanetStatChanged();
     public PlanetStatChanged PlanetStatWasChanged;
 
+    private List<InteractableUIController> m_uiCanvasControllerList;
+
     void OnEnable ()
     {
         Instance = this;
@@ -56,6 +62,14 @@ public class GameManager : MonoBehaviour {
         HeartMan = GetComponent<HeartbeatManager>();
 
         IntroMan.Init();
+        m_uiCanvasControllerList = new List<InteractableUIController>();
+
+        foreach (var item in _uiCanvasList)
+        {
+            m_uiCanvasControllerList.Add(item.GetComponent<InteractableUIController>());
+        }
+
+        //m_uiCanvasController = _uiCanvas.GetComponent<InteractableUIController>();
 
         CurState = SystemState.Revealing;
 
@@ -66,8 +80,28 @@ public class GameManager : MonoBehaviour {
     {
         SelectedPlanet = selectedPlanet;
 
-        _uiCanvas.SetActive(true);
-        _uiCanvas.GetComponent<InteractableUIController>().Init();
+        if (_uiCanvasList != null)
+        {
+            foreach (var item in _uiCanvasList)
+            {
+                item.SetActive(true);
+            }
+        }
+
+        
+
+        foreach (var item in m_uiCanvasControllerList)
+        {
+            item.Init();
+        }
+    }
+
+    public void UpdateAllCanvasValues()
+    {
+        foreach (var item in m_uiCanvasControllerList)
+        {
+            item.Init();
+        }
     }
 
     public void SetPlanetScale(int index, float lerpTime = 1)
@@ -80,20 +114,34 @@ public class GameManager : MonoBehaviour {
         SelectedPlanet.GetComponent<PlanetController>().SizeIndex = index;
         SelectedPlanet.GetComponent<PlanetController>().LerpToSize(_planetScales[index], lerpTime);
 
-        if(!_uiPlanet.activeSelf) return;
-
-        _uiPlanet.GetComponent<UIPlanetController>().LerpToSize(_planetScales[index], index, lerpTime);
+        foreach (var item in _uiPlanets)
+        {
+            if (!item.gameObject.activeSelf) continue;
+            item.LerpToSize(_planetScales[index], index, lerpTime);
+        }
     }
 
-    public void SetPlanetMaterial(int index)
+    public void SetPlanetMaterial(int index, GameObject planet = null)
     {
+        var target = planet;
+
         if (index >= _planetMaterials.Count)
         {
             return;
         }
-        SelectedPlanet.GetComponent<PlanetController>().MaterialIndex = index;
-        SelectedPlanet.GetComponent<MeshRenderer>().material = _planetMaterials[index];
-        _uiPlanet.GetComponentInChildren<MeshRenderer>().material = _planetMaterials[index];
+
+        if (target == null)
+        {
+            target = SelectedPlanet;
+        }
+
+        target.GetComponent<PlanetController>().MaterialIndex = index;
+        target.GetComponent<MeshRenderer>().material = _planetMaterials[index];
+
+        foreach (var item in _uiPlanets)
+        {
+            item.GetComponentInChildren<MeshRenderer>().material = _planetMaterials[index];
+        }
     }
 
     public void AcceptChanges()
@@ -150,10 +198,17 @@ public class GameManager : MonoBehaviour {
 
         CurState = SystemState.Ended;
 
-        ScreenFader.Instance.FadeToBlack(2f);
+       
+
+        _musicController.End(5f);
+
         FaderController.Instance.ChangeSize(new Vector3(200, 200, 200), 0.01f);
-        FaderController.Instance.FadeToColor(2.5f, Color.black);
-        yield return new WaitForSeconds(2.5f);
+        FaderController.Instance.FadeToColor(5f, Color.black);
+        yield return new WaitForSeconds(5f);
+
+        ScreenFader.Instance.FadeToBlack(2f);
+        yield return new WaitForSeconds(2f);
+
         ExperienceApp.End();
     }
 }

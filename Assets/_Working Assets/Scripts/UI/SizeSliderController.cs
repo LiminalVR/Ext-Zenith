@@ -17,7 +17,6 @@ public class SizeSliderController : MonoBehaviour
 
     public void UpdateValues()
     {
-        
         _thisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().SizeIndex;
     }
 
@@ -42,6 +41,7 @@ public class SizeSliderController : MonoBehaviour
 
         var _intVal = Mathf.FloorToInt(sliderValue);
         
-        GameManager.Instance.SetPlanetScale(_intVal,1); 
+        GameManager.Instance.SetPlanetScale(_intVal,1);
+        GameManager.Instance.UpdateAllCanvasValues();
     }
 }

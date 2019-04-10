@@ -9,6 +9,11 @@ public class SliderController : MonoBehaviour
     [SerializeField] private Color _unselectedColor;
     [SerializeField] private Color _selectedColor;
     [SerializeField] private Slider _thisSlider;
+    [SerializeField] private bool _snapToWholeNumber;
+    [SerializeField] private Vector2 _snapRange;
+
+    private int m_nextWhole;
+    private int m_lastWhole;
 
     private void Start()
     {
@@ -16,8 +21,28 @@ public class SliderController : MonoBehaviour
         UpdateMarks(_thisSlider.value);
     }
 
+    public void ValueChanged()
+    {
+        if (!_snapToWholeNumber) return;
+
+        m_nextWhole = Mathf.CeilToInt(_thisSlider.value);
+        m_lastWhole = Mathf.FloorToInt(m_nextWhole-1);
+
+        if (_thisSlider.value >= m_nextWhole + _snapRange.x && _thisSlider.value <= m_nextWhole + _snapRange.y)
+        {
+            _thisSlider.value = m_nextWhole;
+        }
+        else if (_thisSlider.value >= m_lastWhole + _snapRange.x && _thisSlider.value <= m_lastWhole + _snapRange.y)
+        {
+            _thisSlider.value = m_lastWhole;
+        }
+        
+    }
+
     private void Update()
     {
+        if (_thisSlider == null) return;
+
         UpdateMarks(_thisSlider.value);
     }
 

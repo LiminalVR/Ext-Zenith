@@ -24,6 +24,7 @@ public class PlanetController : DiegeticButton
     private Coroutine m_AccellRoutine;
 
 // Use this for initialization
+
     public void LerpToSize(Vector3 targetSize, float lerpTime = 1)
     {
         if (m_SizeRoutine != null)
@@ -56,7 +57,10 @@ public class PlanetController : DiegeticButton
 
         base.OnPointerClick(eventData);
 
+        //edit this to see what's causing slowdown on device
+
         GameManager.Instance.SelectPlanet(gameObject);
+        GameManager.Instance.SetPlanetMaterial(MaterialIndex);
         GameManager.Instance.AcceptChanges();
         Init();
     }

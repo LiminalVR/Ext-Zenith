@@ -10,7 +10,6 @@ public class HeartbeatManager : MonoBehaviour
     [SerializeField] private List<AudioSource> _pooledHeartbeatSources;
     [SerializeField] private AnimationCurve _heartbeatBPMCurve;
     [SerializeField] private AnimationCurve _heartbeatVolumeCurve;
-    [SerializeField] private AudioSource _heartbeatAS;
     [SerializeField] private float _volumeDecreaseSpeed;
 
     // Use this for initialization
