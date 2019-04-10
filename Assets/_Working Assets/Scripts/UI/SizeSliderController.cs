@@ -3,30 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SizeSliderController : MonoBehaviour
+public class SizeSliderController : SliderController
 {
-    [SerializeField] private Slider _thisSlider;
 
     private int m_CachedValue;
 
-    private void OnEnable()
+
+    public override void OnEnable()
     {
-        _thisSlider = GetComponent<Slider>();
+        base.OnEnable();
+    }
+
+    public override void Start()
+    {
+        base.Start();
         UpdateValues();
     }
 
     public void UpdateValues()
     {
         _thisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().SizeIndex;
+        SetPlanetSize(_thisSlider.value, true);
     }
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         SetPlanetSize(_thisSlider.value);
     }
 
-    public void SetPlanetSize(float sliderValue)
+    public void SetPlanetSize(float sliderValue, bool ignoreSnap = false)
     {
+        if (_snapToWholeNumber && !m_snapped && !ignoreSnap)
+        {
+            return;
+        }
+
         if (Mathf.FloorToInt(sliderValue) == m_CachedValue)
         {
             return;

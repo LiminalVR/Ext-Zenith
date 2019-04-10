@@ -4,30 +4,41 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mathf = UnityEngine.Mathf;
 
-public class MaterialSliderController : MonoBehaviour
+public class MaterialSliderController : SliderController
 {
-    [SerializeField] private Slider _thisSlider;
 
     private int m_CachedValue;
 
-    private void OnEnable()
+    public override void OnEnable()
     {
-        _thisSlider = GetComponent<Slider>();
+        base.OnEnable();
+    }
+
+    public override void Start()
+    {
+        base.Start();
         UpdateValues();
     }
 
     public void UpdateValues()
     {
         _thisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().MaterialIndex;
+        SetPlanetMaterial(_thisSlider.value, true);
     }
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         SetPlanetMaterial(_thisSlider.value);
     }
 
-    public void SetPlanetMaterial(float sliderValue)
+    public void SetPlanetMaterial(float sliderValue, bool ignoreSnap = false)
     {
+        if (_snapToWholeNumber && !m_snapped && !ignoreSnap)
+        {
+            return;
+        }
+
         if (Mathf.FloorToInt(sliderValue) == m_CachedValue)
         {
             return;
