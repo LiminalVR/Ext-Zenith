@@ -5,6 +5,7 @@ using UnityEngine;
 public class IntroManager : MonoBehaviour
 {
     public List<PlanetTiming> PlanetTimings;
+    public CanvasGroup IntroCanvas;
 
     [System.Serializable]
     public class PlanetTiming
@@ -29,7 +30,6 @@ public class IntroManager : MonoBehaviour
             planet.LerpToSize(Vector3.zero);   
         }
 
-
         yield return new WaitForSeconds(2f);
         FaderController.Instance.ChangeSize(new Vector3(10000, 10000, 10000), 0.1f);
 
@@ -41,11 +41,31 @@ public class IntroManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         FaderController.Instance.FadeToColor(2, new Color(0, 0, 0, 0));
 
+        yield return new WaitForSeconds(2f);
+
+        var textFadeVal = 0f;
+
+        while (textFadeVal < 1f)
+        {
+            textFadeVal += Time.deltaTime;
+            IntroCanvas.alpha = textFadeVal;
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(4f);
+        while (textFadeVal > 0f)
+        {
+            textFadeVal -= Time.deltaTime;
+            IntroCanvas.alpha = textFadeVal;
+            yield return new WaitForEndOfFrame();
+        }
+
         GameManager.Instance.CurState = GameManager.SystemState.Playing;
         foreach (var planet in GameManager.Instance.AllPlanetControllers)
         {
             planet.SetInteractive(true);
         }
+        
 
         foreach (var item in PlanetTimings)
         {

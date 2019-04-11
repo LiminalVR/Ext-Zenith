@@ -49,7 +49,7 @@ public class FaderController : MonoBehaviour
 
         var _transColor = new Color(0,0,0,0);
 
-        m_ThisMeshCollider.enabled = !targetColor.Equals(_transColor);
+        //m_ThisMeshCollider.enabled = !targetColor.Equals(_transColor);
     }
 
     private IEnumerator GrowToSize(Vector3 targetSize,float growthTime)
