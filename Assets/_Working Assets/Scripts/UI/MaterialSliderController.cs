@@ -22,6 +22,7 @@ public class MaterialSliderController : SliderController
 
     public void UpdateValues()
     {
+        if (GameManager.Instance.SelectedPlanet == null) return;
         _thisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().MaterialIndex;
         SetPlanetMaterial(_thisSlider.value, true);
     }

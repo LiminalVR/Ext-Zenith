@@ -36,8 +36,7 @@ public class IntroManager : MonoBehaviour
         foreach (var planet in GameManager.Instance.AllPlanetControllers)
         {
             yield return new WaitForSeconds(2f);
-            GameManager.Instance.SelectedPlanet = planet.gameObject;
-            GameManager.Instance.SetPlanetScale(planet.SizeIndex);  
+            GameManager.Instance.SetPlanetScale(planet.SizeIndex, 1,planet.gameObject);  
         }
         yield return new WaitForSeconds(2f);
         FaderController.Instance.FadeToColor(2, new Color(0, 0, 0, 0));

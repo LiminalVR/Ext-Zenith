@@ -79,20 +79,15 @@ public class GameManager : MonoBehaviour {
     public void SelectPlanet(GameObject selectedPlanet)
     {
         SelectedPlanet = selectedPlanet;
-
-        if (_uiCanvasList != null)
+        foreach (var item in m_uiCanvasControllerList)
         {
-            foreach (var item in _uiCanvasList)
-            {
-                item.SetActive(true);
-            }
+            item.gameObject.SetActive(true);
         }
-
-        
 
         foreach (var item in m_uiCanvasControllerList)
         {
             item.Init();
+            item.ShowHide(true);
         }
     }
 
@@ -104,19 +99,26 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void SetPlanetScale(int index, float lerpTime = 1)
+    public void SetPlanetScale(int index, float lerpTime = 1, GameObject targetPlanet = null)
     {
         if (index >= _planetScales.Count)
         {
             return;
         }
 
-        SelectedPlanet.GetComponent<PlanetController>().SizeIndex = index;
-        SelectedPlanet.GetComponent<PlanetController>().LerpToSize(_planetScales[index], lerpTime);
+        if (targetPlanet == null)
+        {
+            targetPlanet = SelectedPlanet;
+        }
+
+        targetPlanet.GetComponent<PlanetController>().SizeIndex = index;
+        targetPlanet.GetComponent<PlanetController>().LerpToSize(_planetScales[index], lerpTime);
 
         foreach (var item in _uiPlanets)
         {
             if (!item.gameObject.activeSelf) continue;
+            if (targetPlanet != SelectedPlanet) return;
+            
             item.LerpToSize(_planetScales[index], index, lerpTime);
         }
     }
@@ -142,11 +144,6 @@ public class GameManager : MonoBehaviour {
         {
             item.GetComponentInChildren<MeshRenderer>().material = _planetMaterials[index];
         }
-    }
-
-    public void AcceptChanges()
-    {
-        SelectedPlanet.GetComponent<PlanetController>().Init();
     }
 
     private IEnumerator CountdownTimer()

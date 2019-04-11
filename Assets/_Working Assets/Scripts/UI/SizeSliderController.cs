@@ -22,6 +22,7 @@ public class SizeSliderController : SliderController
 
     public void UpdateValues()
     {
+        if (GameManager.Instance.SelectedPlanet == null) return;
         _thisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().SizeIndex;
         SetPlanetSize(_thisSlider.value, true);
     }

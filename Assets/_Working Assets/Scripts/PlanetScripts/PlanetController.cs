@@ -53,16 +53,13 @@ public class PlanetController : DiegeticButton
 
     public override void OnPointerClick(PointerEventData eventData)
     {
-        if (m_IsInteractive == false) return;
-
         base.OnPointerClick(eventData);
 
         //edit this to see what's causing slowdown on device
 
         GameManager.Instance.SelectPlanet(gameObject);
         GameManager.Instance.SetPlanetMaterial(MaterialIndex);
-        GameManager.Instance.AcceptChanges();
-        Init();
+
     }
 
     public void SetInteractive(bool newState)
