@@ -5069,7 +5069,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 4
-      value: 0.5
+      value: 0.55
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -6901,7 +6901,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 3
-      value: 8
+      value: 7.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -6911,15 +6911,6 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 4
       value: 9
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 5
-      value: 10
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -8288,8 +8279,8 @@ MonoBehaviour:
   - {x: 2, y: 2, z: 2}
   - {x: 4, y: 4, z: 4}
   - {x: 8, y: 8, z: 8}
-  - {x: 10, y: 10, z: 10}
-  - {x: 14, y: 14, z: 14}
+  - {x: 12, y: 12, z: 12}
+  - {x: 16, y: 16, z: 16}
   _planetMaterials:
   - {fileID: 2100000, guid: 2aa9e266e00558f42b6f6209a0a03a3d, type: 2}
   - {fileID: 2100000, guid: d2d948196d1485744940594bb7a22024, type: 2}
