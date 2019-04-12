@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour {
             _safetyTimer+=Time.deltaTime;
 
             //done to stop experience lasting indefinitely if there's an issue
-            if (_safetyTimer >= 60f)
+            if (_safetyTimer >= 100f)
             {
                 break;
             }

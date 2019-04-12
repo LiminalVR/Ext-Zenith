@@ -1,17 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InteractableUIController : MonoBehaviour
 {
-    [SerializeField] private float m_TimeToWaitBeforeDisable;
-    [SerializeField] private List<Transform> m_TargetPoints;
-    [SerializeField] private AnimationCurve m_SizeCurve;
+    [FormerlySerializedAs("m_TimeToWaitBeforeDisable")]
+    [SerializeField] private float _timeToWaitBeforeDisable;
+    [FormerlySerializedAs("m_TargetPoints")]
+    [SerializeField] private List<Transform> _targetPoints;
+    [FormerlySerializedAs("m_GrowthCurve")]
+    [SerializeField] private AnimationCurve _growthCurve;
+    [FormerlySerializedAs("m_ShrinkCurve")]
+    [SerializeField] private AnimationCurve _shrinkCurve;
+    [FormerlySerializedAs("m_CurState")]
+    [SerializeField] private UIState _curState;
+    [SerializeField] private CanvasGroup _CGroup;
 
     private Coroutine m_DisableRoutine;
     private float m_UpTime;
     private Coroutine m_SizeLerp;
     private bool m_CachedIsShowing = false;
+
+    public enum UIState
+    {
+        Visible,
+        Hidden,
+        Showing,
+        Hiding,
+    };
+
 
     public void Init()
     {
@@ -19,10 +37,13 @@ public class InteractableUIController : MonoBehaviour
         GetComponentInChildren<SizeSliderController>(includeInactive: true).UpdateValues();
         GetComponentInChildren<MaterialSliderController>(includeInactive: true).UpdateValues();
 
+        if (_curState != UIState.Visible) return;
+
         if (m_DisableRoutine != null)
         {
             StopCoroutine(m_DisableRoutine);
         }
+
         m_DisableRoutine = StartCoroutine(DisableTimer());
     }
 
@@ -33,10 +54,10 @@ public class InteractableUIController : MonoBehaviour
 
     public void UpdatePosition()
     {
-        var closestPoint = m_TargetPoints[0];
+        var closestPoint = _targetPoints[0];
         var greatestValue = 0f;
 
-        foreach (var point in m_TargetPoints)
+        foreach (var point in _targetPoints)
         {
             var forward = Camera.main.transform.forward;
             var toOther = point.position - Camera.main.transform.position;
@@ -55,14 +76,6 @@ public class InteractableUIController : MonoBehaviour
         transform.localPosition = Vector3.zero;
     }
 
-    void OnEnable()
-    {
-        if (m_DisableRoutine == null)
-        {
-            m_DisableRoutine = StartCoroutine(DisableTimer());
-        }
-    }
-
     private void ResetTimer()
     {
         m_UpTime = 0;
@@ -70,7 +83,7 @@ public class InteractableUIController : MonoBehaviour
 
     private IEnumerator DisableTimer()
     {
-        while (m_UpTime < m_TimeToWaitBeforeDisable)
+        while (m_UpTime < _timeToWaitBeforeDisable)
         {
             m_UpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -91,39 +104,35 @@ public class InteractableUIController : MonoBehaviour
 
     private IEnumerator ShowHideRoutine(bool isShowing)
     {
-        var speed = -1f;
-        var positionOnCurve = 1f;
         var elapsedTime = 0f;
-        var maxTime = m_SizeCurve.keys[m_SizeCurve.keys.Length - 1].time;
+        var targetCurve = _shrinkCurve;
+        _curState = UIState.Hiding;
+
+        _CGroup.interactable = false;
 
         if (isShowing)
         {
-            speed = 1f;
-            positionOnCurve = 0;
+            targetCurve = _growthCurve;
+            _curState = UIState.Showing;
+        }
 
-            if (Mathf.Approximately(transform.localScale.x, Vector3.one.x * m_SizeCurve.Evaluate(maxTime)))
-            {
-                if (m_DisableRoutine == null)
-                {
-                    m_DisableRoutine = StartCoroutine(DisableTimer());
-                }
-                yield break;
-            }
+        var maxTime = targetCurve.keys[_shrinkCurve.keys.Length - 1].time;
+
+        if (Mathf.Approximately(transform.localScale.x, Vector3.one.x * targetCurve.Evaluate(maxTime)))
+        {
+            elapsedTime = maxTime;
         }
 
         while (elapsedTime < maxTime)
         {
-            
-            positionOnCurve += speed * Time.deltaTime;
             elapsedTime += Time.deltaTime;
 
             //done to prevent visual bugs when swapping between planets when UI changing size
-            while (!Mathf.Approximately(transform.localScale.x, Vector3.one.x * m_SizeCurve.Evaluate(positionOnCurve)))
+            while (!Mathf.Approximately(transform.localScale.x, Vector3.one.x * targetCurve.Evaluate(elapsedTime)))
             {
-                transform.localScale = Vector3.one * m_SizeCurve.Evaluate(positionOnCurve);
+                transform.localScale = Vector3.one * targetCurve.Evaluate(elapsedTime);
                 yield return new WaitForEndOfFrame();
             }
-            print(elapsedTime +"   "+isShowing);
 
             yield return new WaitForEndOfFrame();
         }
@@ -132,11 +141,17 @@ public class InteractableUIController : MonoBehaviour
 
         if (!isShowing)
         {
+            _curState = UIState.Hidden;
             gameObject.SetActive(false);
         }
-        else if(m_DisableRoutine == null)
+        else
         {
-            m_DisableRoutine = StartCoroutine(DisableTimer());
-        }
+            _curState = UIState.Visible;
+            _CGroup.interactable = true;
+            if (m_DisableRoutine == null)
+            {
+                m_DisableRoutine = StartCoroutine(DisableTimer());
+            }
+        } 
     }
 }

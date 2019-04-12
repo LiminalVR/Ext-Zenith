@@ -52,6 +52,11 @@ public class FaderController : MonoBehaviour
         //m_ThisMeshCollider.enabled = !targetColor.Equals(_transColor);
     }
 
+    public void SetRenderOrder(int renderOrder)
+    {
+        m_ThisMaterial.renderQueue = renderOrder;
+    }
+
     private IEnumerator GrowToSize(Vector3 targetSize,float growthTime)
     {
         var _elapsedTime = 0f;

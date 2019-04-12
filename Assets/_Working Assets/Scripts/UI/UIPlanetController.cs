@@ -25,6 +25,7 @@ public class UIPlanetController : MonoBehaviour
 
     private IEnumerator SizeLerp(Vector3 targetSize, int index, float lerpTime = 1)
     {
+        print(index);
         var _elapsedTime = 0f;
         var _startSize = transform.localScale;
 
