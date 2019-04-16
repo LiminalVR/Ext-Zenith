@@ -17,6 +17,7 @@ public class MaterialSliderController : SliderController
     public override void Start()
     {
         base.Start();
+        _thisSlider.onValueChanged.AddListener(delegate { ValueChanged(); });
         UpdateValues();
     }
 

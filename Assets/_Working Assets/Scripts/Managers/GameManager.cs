@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
 
     private List<InteractableUIController> m_uiCanvasControllerList;
 
-    void OnEnable ()
+    void Start ()
     {
         Instance = this;
 
