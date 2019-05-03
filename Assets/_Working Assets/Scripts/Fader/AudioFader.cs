@@ -12,7 +12,7 @@ public class AudioFader : MonoBehaviour
     {
         Instance = this;
         FadeToVolume(0, 0);
-        FadeToVolume(1, 10);
+        FadeToVolume(0.8f, 10);
     }
 
     public void FadeToVolume(float targetVolume, float fadeTime = 1f)
