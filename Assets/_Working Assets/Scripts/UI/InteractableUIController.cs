@@ -4,26 +4,54 @@ using UnityEngine;
 
 public class InteractableUIController : MonoBehaviour
 {
-    [SerializeField] private float m_TimeToWaitBeforeDisable;
-    [SerializeField] private List<Transform> m_TargetPoints;
+    [SerializeField] private float _timeToWaitBeforeDisable;
+    [SerializeField] private List<Transform> _targetPoints;
+    [SerializeField] private AnimationCurve _growthCurve;
+    [SerializeField] private AnimationCurve _shrinkCurve;
+    [SerializeField] private UIState _curState;
+    [SerializeField] private CanvasGroup _CGroup;
 
     private Coroutine m_DisableRoutine;
-    private float m_ElapsedTime;
+    private float m_UpTime;
+    private Coroutine m_SizeLerp;
+    private bool m_CachedIsShowing = false;
 
-    void Start()
+    public enum UIState
     {
-        GameManager.Instance.PlanetStatWasChanged += ResetTimer;
-    }
+        Visible,
+        Hidden,
+        Showing,
+        Hiding,
+    };
+
 
     public void Init()
     {
+        GameManager.Instance.PlanetStatWasChanged += ResetTimer;
         GetComponentInChildren<SizeSliderController>(includeInactive: true).UpdateValues();
         GetComponentInChildren<MaterialSliderController>(includeInactive: true).UpdateValues();
 
-        var closestPoint = m_TargetPoints[0];
+        if (_curState != UIState.Visible) return;
+
+        if (m_DisableRoutine != null)
+        {
+            StopCoroutine(m_DisableRoutine);
+        }
+
+        m_DisableRoutine = StartCoroutine(DisableTimer());
+    }
+
+    public void Update()
+    {
+        UpdatePosition();
+    }
+
+    public void UpdatePosition()
+    {
+        var closestPoint = _targetPoints[0];
         var greatestValue = 0f;
 
-        foreach (var point in m_TargetPoints)
+        foreach (var point in _targetPoints)
         {
             var forward = Camera.main.transform.forward;
             var toOther = point.position - Camera.main.transform.position;
@@ -42,29 +70,82 @@ public class InteractableUIController : MonoBehaviour
         transform.localPosition = Vector3.zero;
     }
 
-    void OnEnable()
-    {
-        if (m_DisableRoutine == null)
-        {
-            m_DisableRoutine = StartCoroutine(DisableTimer());
-        }
-    }
-
     private void ResetTimer()
     {
-        m_ElapsedTime = 0;
+        m_UpTime = 0;
     }
 
     private IEnumerator DisableTimer()
     {
-        while (m_ElapsedTime < m_TimeToWaitBeforeDisable)
+        while (m_UpTime < _timeToWaitBeforeDisable)
         {
-            m_ElapsedTime += Time.deltaTime;
+            m_UpTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        m_ElapsedTime = 0;
+        m_UpTime = 0;
         m_DisableRoutine = null;
-        gameObject.SetActive(false);
+
+        ShowHide(false);
+    }
+
+    public void ShowHide(bool isShowing)
+    {
+        if (m_SizeLerp != null) return;
+
+        m_SizeLerp = StartCoroutine(ShowHideRoutine(isShowing));
+    }
+
+    private IEnumerator ShowHideRoutine(bool isShowing)
+    {
+        var elapsedTime = 0f;
+        var targetCurve = _shrinkCurve;
+        _curState = UIState.Hiding;
+
+        _CGroup.interactable = false;
+
+        if (isShowing)
+        {
+            targetCurve = _growthCurve;
+            _curState = UIState.Showing;
+        }
+
+        var maxTime = targetCurve.keys[_shrinkCurve.keys.Length - 1].time;
+
+        if (Mathf.Approximately(transform.localScale.x, Vector3.one.x * targetCurve.Evaluate(maxTime)))
+        {
+            elapsedTime = maxTime;
+        }
+
+        while (elapsedTime < maxTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            //done to prevent visual bugs when swapping between planets when UI changing size
+            while (!Mathf.Approximately(transform.localScale.x, Vector3.one.x * targetCurve.Evaluate(elapsedTime)))
+            {
+                transform.localScale = Vector3.one * targetCurve.Evaluate(elapsedTime);
+                yield return new WaitForEndOfFrame();
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        m_SizeLerp = null;
+
+        if (!isShowing)
+        {
+            _curState = UIState.Hidden;
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            _curState = UIState.Visible;
+            _CGroup.interactable = true;
+            if (m_DisableRoutine == null)
+            {
+                m_DisableRoutine = StartCoroutine(DisableTimer());
+            }
+        } 
     }
 }

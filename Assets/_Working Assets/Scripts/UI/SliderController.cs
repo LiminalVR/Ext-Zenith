@@ -5,24 +5,64 @@ using UnityEngine.UI;
 
 public class SliderController : MonoBehaviour
 {
-    [SerializeField] private List<Image> _sliderMarks;
-    [SerializeField] private Color _unselectedColor;
-    [SerializeField] private Color _selectedColor;
-    [SerializeField] private Slider _thisSlider;
+    [SerializeField] protected List<Image> _sliderMarks;
+    [SerializeField] protected Color _unselectedColor;
+    [SerializeField] protected Color _selectedColor;
+    [SerializeField] protected Slider _thisSlider;
+    [SerializeField] protected bool _snapToWholeNumber;
+    [SerializeField] protected Vector2 _snapRange;
 
-    private void Start()
+    protected int m_nextWhole;
+    protected int m_lastWhole;
+    protected bool m_snapped;
+
+    public virtual void OnEnable()
+    {
+    }
+
+    public virtual void Start()
     {
         _thisSlider = GetComponent<Slider>();
+        UpdateMarks(_thisSlider.value,true);
+    }
+
+    public virtual void ValueChanged()
+    {
+        if (!_snapToWholeNumber) return;
+
+        m_nextWhole = Mathf.CeilToInt(_thisSlider.value);
+        m_lastWhole = Mathf.FloorToInt(_thisSlider.value);
+
+        if (_thisSlider.value >= m_nextWhole + _snapRange.x && _thisSlider.value <= m_nextWhole + _snapRange.y)
+        {
+            _thisSlider.value = m_nextWhole;
+            m_snapped = true;
+        }
+        else if (_thisSlider.value >= m_lastWhole + _snapRange.x && _thisSlider.value <= m_lastWhole + _snapRange.y)
+        {
+            _thisSlider.value = m_lastWhole;
+            m_snapped = true;
+        }
+        else
+        {
+            m_snapped = false;
+        }
+    }
+
+    public virtual void Update()
+    {
+        if (_thisSlider == null) return;
+
         UpdateMarks(_thisSlider.value);
     }
 
-    private void Update()
+    public virtual void UpdateMarks(float sliderValue, bool ignoreSnap = false)
     {
-        UpdateMarks(_thisSlider.value);
-    }
+        if (_snapToWholeNumber && !m_snapped && !ignoreSnap)
+        {
+            return;
+        }
 
-    public void UpdateMarks(float sliderValue)
-    {
         var _intVal = Mathf.FloorToInt(sliderValue);
 
         for (var i = 0; i < _sliderMarks.Count; i++)

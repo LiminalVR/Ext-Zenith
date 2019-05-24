@@ -1,19 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FaderController : MonoBehaviour
 {
     public static FaderController Instance;
     private Material m_ThisMaterial;
-    private MeshCollider m_ThisMeshCollider;
     private Coroutine m_FadeRoutine;
-
 
     private void Start()
     {
         m_ThisMaterial = GetComponent<MeshRenderer>().material;
-        m_ThisMeshCollider = GetComponent<MeshCollider>();
 
         Instance = this;
     }
@@ -48,8 +44,11 @@ public class FaderController : MonoBehaviour
         }
 
         var _transColor = new Color(0,0,0,0);
+    }
 
-        m_ThisMeshCollider.enabled = !targetColor.Equals(_transColor);
+    public void SetRenderOrder(int renderOrder)
+    {
+        m_ThisMaterial.renderQueue = renderOrder;
     }
 
     private IEnumerator GrowToSize(Vector3 targetSize,float growthTime)

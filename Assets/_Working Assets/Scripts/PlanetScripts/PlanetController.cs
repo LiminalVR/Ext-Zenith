@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,14 +15,10 @@ public class PlanetController : DiegeticButton
     public int MaterialIndex;
 
     private float m_AcceleratonTime = 0;
-
     private Coroutine m_SizeRoutine;
-
     private bool m_IsInteractive;
-
     private Coroutine m_AccellRoutine;
 
-// Use this for initialization
     public void LerpToSize(Vector3 targetSize, float lerpTime = 1)
     {
         if (m_SizeRoutine != null)
@@ -52,13 +47,10 @@ public class PlanetController : DiegeticButton
 
     public override void OnPointerClick(PointerEventData eventData)
     {
-        if (m_IsInteractive == false) return;
-
         base.OnPointerClick(eventData);
 
         GameManager.Instance.SelectPlanet(gameObject);
-        GameManager.Instance.AcceptChanges();
-        Init();
+        GameManager.Instance.SetPlanetMaterial(MaterialIndex);
     }
 
     public void SetInteractive(bool newState)
@@ -68,7 +60,8 @@ public class PlanetController : DiegeticButton
 
     public void Init()
     {
-        if (m_AccellRoutine != null) return;
+        if (m_AccellRoutine != null)
+            return;
         
         m_AccellRoutine = StartCoroutine(AccelerateRoutine());
     }

@@ -50,7 +50,6 @@ public class DiegeticButton : MonoBehaviour,IPointerClickHandler,IPointerEnterHa
     {
         m_Interactable = nState;
 
-        //if nState == true use the enabled color, else use the disabled color.
         GetComponent<MeshRenderer>().material.color = nState ? _enabledCol : _disabledCol;
     }
 }

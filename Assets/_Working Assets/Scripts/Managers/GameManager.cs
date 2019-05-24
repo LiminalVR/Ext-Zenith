@@ -1,13 +1,8 @@
-﻿using Liminal.SDK.VR;
-using Liminal.SDK.VR.Input;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Liminal.Core.Fader;
 using Liminal.SDK.Core;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
 
@@ -24,12 +19,14 @@ public class GameManager : MonoBehaviour {
     public SystemState CurState;
 
     [Header("Planet Scale and Material Variables:")]
-    
     [SerializeField] private List<Vector3> _planetScales;
     [SerializeField] private List<Material> _planetMaterials;
-    [SerializeField] private GameObject _uiCanvas;
-    [SerializeField] private GameObject _uiPlanet;
+    [SerializeField] private List<GameObject> _uiCanvasList;
+    [SerializeField] private List<UIPlanetController> _uiPlanets;
     public GameObject SelectedPlanet;
+
+    [Header("Misc")]
+    [SerializeField] private MusicController _musicController;
 
     [Header("Managers:")]
     public IntroManager IntroMan;
@@ -48,7 +45,9 @@ public class GameManager : MonoBehaviour {
     public delegate void PlanetStatChanged();
     public PlanetStatChanged PlanetStatWasChanged;
 
-    void OnEnable ()
+    private List<InteractableUIController> m_uiCanvasControllerList;
+
+    void Start ()
     {
         Instance = this;
 
@@ -56,6 +55,12 @@ public class GameManager : MonoBehaviour {
         HeartMan = GetComponent<HeartbeatManager>();
 
         IntroMan.Init();
+        m_uiCanvasControllerList = new List<InteractableUIController>();
+
+        foreach (var item in _uiCanvasList)
+        {
+            m_uiCanvasControllerList.Add(item.GetComponent<InteractableUIController>());
+        }
 
         CurState = SystemState.Revealing;
 
@@ -65,40 +70,71 @@ public class GameManager : MonoBehaviour {
     public void SelectPlanet(GameObject selectedPlanet)
     {
         SelectedPlanet = selectedPlanet;
+        foreach (var item in m_uiCanvasControllerList)
+        {
+            item.gameObject.SetActive(true);
+        }
 
-        _uiCanvas.SetActive(true);
-        _uiCanvas.GetComponent<InteractableUIController>().Init();
+        foreach (var item in m_uiCanvasControllerList)
+        {
+            item.Init();
+            item.ShowHide(true);
+        }
     }
 
-    public void SetPlanetScale(int index, float lerpTime = 1)
+    public void UpdateAllCanvasValues()
+    {
+        foreach (var item in m_uiCanvasControllerList)
+        {
+            item.Init();
+        }
+    }
+
+    public void SetPlanetScale(int index, float lerpTime = 1, GameObject targetPlanet = null)
     {
         if (index >= _planetScales.Count)
         {
             return;
         }
 
-        SelectedPlanet.GetComponent<PlanetController>().SizeIndex = index;
-        SelectedPlanet.GetComponent<PlanetController>().LerpToSize(_planetScales[index], lerpTime);
+        if (targetPlanet == null)
+        {
+            targetPlanet = SelectedPlanet;
+        }
 
-        if(!_uiPlanet.activeSelf) return;
+        targetPlanet.GetComponent<PlanetController>().SizeIndex = index;
+        targetPlanet.GetComponent<PlanetController>().LerpToSize(_planetScales[index], lerpTime);
 
-        _uiPlanet.GetComponent<UIPlanetController>().LerpToSize(_planetScales[index], index, lerpTime);
+        foreach (var item in _uiPlanets)
+        {
+            if (!item.gameObject.activeSelf) continue;
+            if (targetPlanet != SelectedPlanet) return;
+            
+            item.LerpToSize(_planetScales[index], index, lerpTime);
+        }
     }
 
-    public void SetPlanetMaterial(int index)
+    public void SetPlanetMaterial(int index, GameObject planet = null)
     {
+        var target = planet;
+
         if (index >= _planetMaterials.Count)
         {
             return;
         }
-        SelectedPlanet.GetComponent<PlanetController>().MaterialIndex = index;
-        SelectedPlanet.GetComponent<MeshRenderer>().material = _planetMaterials[index];
-        _uiPlanet.GetComponentInChildren<MeshRenderer>().material = _planetMaterials[index];
-    }
 
-    public void AcceptChanges()
-    {
-        SelectedPlanet.GetComponent<PlanetController>().Init();
+        if (target == null)
+        {
+            target = SelectedPlanet;
+        }
+
+        target.GetComponent<PlanetController>().MaterialIndex = index;
+        target.GetComponent<MeshRenderer>().material = _planetMaterials[index];
+
+        foreach (var item in _uiPlanets)
+        {
+            item.GetComponentInChildren<MeshRenderer>().material = _planetMaterials[index];
+        }
     }
 
     private IEnumerator CountdownTimer()
@@ -141,7 +177,7 @@ public class GameManager : MonoBehaviour {
             _safetyTimer+=Time.deltaTime;
 
             //done to stop experience lasting indefinitely if there's an issue
-            if (_safetyTimer >= 60f)
+            if (_safetyTimer >= 100f)
             {
                 break;
             }
@@ -150,10 +186,17 @@ public class GameManager : MonoBehaviour {
 
         CurState = SystemState.Ended;
 
-        ScreenFader.Instance.FadeToBlack(2f);
+       
+
+        _musicController.End(5f);
+
         FaderController.Instance.ChangeSize(new Vector3(200, 200, 200), 0.01f);
-        FaderController.Instance.FadeToColor(2.5f, Color.black);
-        yield return new WaitForSeconds(2.5f);
+        FaderController.Instance.FadeToColor(5f, Color.black);
+        yield return new WaitForSeconds(5f);
+
+        ScreenFader.Instance.FadeToBlack(2f);
+        yield return new WaitForSeconds(2f);
+
         ExperienceApp.End();
     }
 }
