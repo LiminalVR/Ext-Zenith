@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_Planet_2
-  m_Shader: {fileID: 4800000, guid: 6835af56662a43e4689fa2127bf8dd53, type: 3}
+  m_Shader: {fileID: 4800000, guid: ace16a65d992c204fa85a3533ea70a8a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -41,4 +41,8 @@ Material:
     - _node_6144: 0.14
     - _node_6144_copy: 0.81
     - _node_7820: 3.5
-    m_Colors: []
+    m_Colors:
+    - Vector2_33F14FDF: {r: 1, g: 1, b: 0, a: 0}
+    - Vector2_7883E254: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_9DB6C66D: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_C5F2B123: {r: 1, g: 1, b: 0, a: 0}

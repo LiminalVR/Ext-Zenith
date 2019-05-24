@@ -32,14 +32,14 @@ public class FaderController : MonoBehaviour
     private IEnumerator Fade(float timeToFade, Color targetColor)
     {
         float _elapsedTime = 0;
-        var _startColor = m_ThisMaterial.GetColor("_Color");
+        var _startColor = m_ThisMaterial.GetColor("_color");
         var _lerpColor = _startColor;
 
         while (_elapsedTime < timeToFade)
         { 
             _elapsedTime += Time.deltaTime;
             _lerpColor = Color.Lerp(_startColor, targetColor, _elapsedTime / timeToFade);
-            m_ThisMaterial.SetColor("_Color", _lerpColor);
+            m_ThisMaterial.SetColor("_color", _lerpColor);
             yield return new WaitForEndOfFrame();
         }
 

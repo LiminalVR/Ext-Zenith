@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_Fader
-  m_Shader: {fileID: 4800000, guid: 52b2e582adabbb546b743d4bc65bab45, type: 3}
+  m_Shader: {fileID: 4800000, guid: 156d1d6ede7a9124f9716a50635287e7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -30,6 +30,8 @@ Material:
     - _node_7219: 57.3
     - _node_7706: 1
     m_Colors:
+    - Color_A15C2DB9: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _FadeToColor: {r: 0, g: 0, b: 0, a: 1}
+    - _color: {r: 0, g: 0, b: 0, a: 1}
     - _node_3443: {r: 0, g: 0.006491044, b: 0.9411765, a: 1}
