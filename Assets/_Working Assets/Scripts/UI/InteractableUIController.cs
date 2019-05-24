@@ -5,15 +5,10 @@ using UnityEngine.Serialization;
 
 public class InteractableUIController : MonoBehaviour
 {
-    [FormerlySerializedAs("m_TimeToWaitBeforeDisable")]
     [SerializeField] private float _timeToWaitBeforeDisable;
-    [FormerlySerializedAs("m_TargetPoints")]
     [SerializeField] private List<Transform> _targetPoints;
-    [FormerlySerializedAs("m_GrowthCurve")]
     [SerializeField] private AnimationCurve _growthCurve;
-    [FormerlySerializedAs("m_ShrinkCurve")]
     [SerializeField] private AnimationCurve _shrinkCurve;
-    [FormerlySerializedAs("m_CurState")]
     [SerializeField] private UIState _curState;
     [SerializeField] private CanvasGroup _CGroup;
 
