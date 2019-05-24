@@ -23,6 +23,7 @@ public class IntroManager : MonoBehaviour
     private IEnumerator ScriptRoutine()
     {
         yield return new WaitForSeconds(0.1f);
+
         GameManager.Instance.HeartMan.Init();
 
         foreach (var planet in GameManager.Instance.AllPlanetControllers)
@@ -57,7 +58,9 @@ public class IntroManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
             GameManager.Instance.SetPlanetScale(planet.SizeIndex, 1,planet.gameObject);  
         }
+
         yield return new WaitForSeconds(2f);
+
         FaderController.Instance.FadeToColor(2, new Color(0, 0, 0, 0));
 
         GameManager.Instance.CurState = GameManager.SystemState.Playing;

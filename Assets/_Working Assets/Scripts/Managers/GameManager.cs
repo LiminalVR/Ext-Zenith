@@ -1,13 +1,8 @@
-﻿using Liminal.SDK.VR;
-using Liminal.SDK.VR.Input;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Liminal.Core.Fader;
 using Liminal.SDK.Core;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
 
@@ -22,8 +17,6 @@ public class GameManager : MonoBehaviour {
     public float NormalizedTime;
     private float m_TimeRemaining;
     public SystemState CurState;
-
- 
 
     [Header("Planet Scale and Material Variables:")]
     [SerializeField] private List<Vector3> _planetScales;
@@ -68,8 +61,6 @@ public class GameManager : MonoBehaviour {
         {
             m_uiCanvasControllerList.Add(item.GetComponent<InteractableUIController>());
         }
-
-        //m_uiCanvasController = _uiCanvas.GetComponent<InteractableUIController>();
 
         CurState = SystemState.Revealing;
 

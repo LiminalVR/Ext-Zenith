@@ -18,7 +18,6 @@ public class SliderController : MonoBehaviour
 
     public virtual void OnEnable()
     {
-
     }
 
     public virtual void Start()
@@ -48,8 +47,6 @@ public class SliderController : MonoBehaviour
         {
             m_snapped = false;
         }
-
-
     }
 
     public virtual void Update()

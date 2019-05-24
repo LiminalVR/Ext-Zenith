@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,14 +15,9 @@ public class PlanetController : DiegeticButton
     public int MaterialIndex;
 
     private float m_AcceleratonTime = 0;
-
     private Coroutine m_SizeRoutine;
-
     private bool m_IsInteractive;
-
     private Coroutine m_AccellRoutine;
-
-// Use this for initialization
 
     public void LerpToSize(Vector3 targetSize, float lerpTime = 1)
     {
@@ -55,11 +49,8 @@ public class PlanetController : DiegeticButton
     {
         base.OnPointerClick(eventData);
 
-        //edit this to see what's causing slowdown on device
-
         GameManager.Instance.SelectPlanet(gameObject);
         GameManager.Instance.SetPlanetMaterial(MaterialIndex);
-
     }
 
     public void SetInteractive(bool newState)
@@ -69,7 +60,8 @@ public class PlanetController : DiegeticButton
 
     public void Init()
     {
-        if (m_AccellRoutine != null) return;
+        if (m_AccellRoutine != null)
+            return;
         
         m_AccellRoutine = StartCoroutine(AccelerateRoutine());
     }

@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using Mathf = UnityEngine.Mathf;
+﻿using Mathf = UnityEngine.Mathf;
 
 public class MaterialSliderController : SliderController
 {
-
     private int m_CachedValue;
 
     public override void OnEnable()
@@ -23,7 +18,9 @@ public class MaterialSliderController : SliderController
 
     public void UpdateValues()
     {
-        if (GameManager.Instance.SelectedPlanet == null) return;
+        if (GameManager.Instance.SelectedPlanet == null)
+            return;
+
         _thisSlider.value = GameManager.Instance.SelectedPlanet.GetComponent<PlanetController>().MaterialIndex;
         SetPlanetMaterial(_thisSlider.value, true);
     }

@@ -10,14 +10,12 @@ public class HeartbeatManager : MonoBehaviour
     [SerializeField] private List<AudioSource> _pooledHeartbeatSources;
     [SerializeField] private AnimationCurve _heartbeatBPMCurve;
     [SerializeField] private AnimationCurve _heartbeatVolumeCurve;
-    [SerializeField] private float _volumeDecreaseSpeed;
 
     // Use this for initialization
     public void Init ()
     {
         StartCoroutine(HeartbeatRoutine());
     }
-
     private IEnumerator HeartbeatRoutine()
     {
         while (GameManager.Instance.CurState == GameManager.SystemState.Revealing)
@@ -44,10 +42,6 @@ public class HeartbeatManager : MonoBehaviour
             HB.Play();
         }
 
-        if (Heartbeat != null)
-        {
-            //done as an event so that we can hook up external scripts to  call events.
-            Heartbeat.Invoke();
-        }
+        Heartbeat?.Invoke();
     }
 }
