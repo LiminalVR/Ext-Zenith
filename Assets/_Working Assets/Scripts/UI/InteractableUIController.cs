@@ -121,15 +121,12 @@ public class InteractableUIController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            //done to prevent visual bugs when swapping between planets when UI changing size
-            while (!Mathf.Approximately(transform.localScale.x, Vector3.one.x * targetCurve.Evaluate(elapsedTime)))
-            {
-                transform.localScale = Vector3.one * targetCurve.Evaluate(elapsedTime);
-                yield return new WaitForEndOfFrame();
-            }
+            transform.localScale = Vector3.one * targetCurve.Evaluate(elapsedTime);
 
             yield return new WaitForEndOfFrame();
         }
+
+        transform.localScale = Vector3.one * targetCurve.Evaluate(maxTime);
 
         m_SizeLerp = null;
 
