@@ -36,7 +36,8 @@ public class HeartbeatManager : MonoBehaviour
     {
         foreach (var HB in _pooledHeartbeatSources)
         {
-            if(HB.isPlaying) continue;
+            if(HB.isPlaying) 
+                continue;
 
             HB.volume = _heartbeatVolumeCurve.Evaluate(GameManager.Instance.NormalizedTime);
             HB.Play();
