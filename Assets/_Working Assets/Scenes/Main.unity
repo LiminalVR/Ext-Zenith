@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EmulatorDevice: 1
-  m_BuildDevice: 0
+  m_BuildDevice: 2
 --- !u!114 &69831796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8507,13 +8507,13 @@ MonoBehaviour:
   - Planet: {fileID: 862296889}
     delay: 1
   - Planet: {fileID: 270519184}
-    delay: 8
+    delay: 12
   - Planet: {fileID: 1676192837}
     delay: 0.01
   - Planet: {fileID: 984544784}
-    delay: 8
+    delay: 12
   - Planet: {fileID: 563738668}
-    delay: 8
+    delay: 12
   IntroCanvas: {fileID: 1603040436}
 --- !u!114 &1806715594
 MonoBehaviour:
