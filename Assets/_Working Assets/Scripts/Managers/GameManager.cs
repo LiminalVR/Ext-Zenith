@@ -194,8 +194,19 @@ public class GameManager : MonoBehaviour {
         FaderController.Instance.FadeToColor(5f, Color.black);
         yield return new WaitForSeconds(5f);
 
-        ScreenFader.Instance.FadeToBlack(2f);
-        yield return new WaitForSeconds(2f);
+
+        var elapsedTime = 0f;
+        var fadeTime = 2f;
+
+        ScreenFader.Instance.FadeToBlack(fadeTime);
+
+        while (elapsedTime < fadeTime)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return ScreenFader.Instance.WaitUntilFadeComplete();
 
         ExperienceApp.End();
     }
